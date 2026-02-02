@@ -209,147 +209,127 @@ export default function Linkyboss() {
     URL.revokeObjectURL(url);
   };
 
-  // Landing Page - Conversational Style
+  // Landing Page - Centered Style
   if (stage === 'landing') {
     return (
       <div style={{
         minHeight: '100vh',
-        background: '#fafafa',
+        background: '#0a0a0a',
         display: 'flex',
         flexDirection: 'column',
-        fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
+        fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+        position: 'relative'
       }}>
+        {/* Amber gradient glow */}
+        <div className="amber-glow" />
+
+        {/* Header */}
         <div style={{
-          padding: '16px 24px',
-          background: '#fff',
-          borderBottom: '1px solid #eee',
+          padding: '20px 32px',
           display: 'flex',
           alignItems: 'center',
-          gap: '12px'
+          justifyContent: 'space-between',
+          position: 'relative',
+          zIndex: 1
         }}>
-          <div style={{
-            width: '36px',
-            height: '36px',
-            borderRadius: '50%',
-            background: '#000',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: '#fff',
-            fontSize: '14px',
-            fontWeight: 600
-          }}>L</div>
-          <div>
-            <div style={{ color: '#000', fontWeight: 500, fontSize: '15px' }}>Linkyboss</div>
-            <div style={{ color: '#999', fontSize: '12px' }}>online</div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div style={{
+              width: '32px',
+              height: '32px',
+              borderRadius: '50%',
+              background: '#1a1a1a',
+              border: '1px solid #333',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#fff',
+              fontSize: '16px',
+              fontWeight: 600
+            }}>✦</div>
+            <div style={{ color: '#fff', fontWeight: 500, fontSize: '15px' }}>Linkyboss</div>
           </div>
+
+          <button style={{
+            background: 'transparent',
+            border: '1px solid #333',
+            padding: '8px 16px',
+            fontSize: '14px',
+            fontWeight: 500,
+            color: '#a0a0a0',
+            borderRadius: '8px',
+            cursor: 'pointer'
+          }}>
+            Open Control Center
+          </button>
         </div>
-        
+
+        {/* Centered content */}
         <div style={{
           flex: 1,
           display: 'flex',
           flexDirection: 'column',
+          alignItems: 'center',
           justifyContent: 'center',
           padding: '24px',
-          maxWidth: '680px',
-          width: '100%',
-          margin: '0 auto',
-          boxSizing: 'border-box'
+          textAlign: 'center',
+          position: 'relative',
+          zIndex: 1
         }}>
-          <div style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '12px'
+          <div style={{ fontSize: '32px', marginBottom: '24px' }}>✦</div>
+
+          <h1 style={{
+            fontSize: '48px',
+            fontWeight: 600,
+            color: '#fff',
+            margin: '0 0 16px 0',
+            letterSpacing: '-1px'
           }}>
-            <div style={{
-              maxWidth: '85%',
-              padding: '12px 16px',
-              borderRadius: '16px 16px 16px 4px',
-              background: '#fff',
-              color: '#000',
-              fontSize: '15px',
-              lineHeight: 1.5,
-              boxShadow: '0 1px 2px rgba(0,0,0,0.05)',
-              border: '1px solid #eee'
-            }}>
-              Hey. Before you post another LinkedIn update that sounds like everyone else... let's figure out what makes you actually worth following.
-            </div>
-            
-            <div style={{
-              maxWidth: '85%',
-              padding: '12px 16px',
-              borderRadius: '16px 16px 16px 4px',
-              background: '#fff',
-              color: '#000',
-              fontSize: '15px',
-              lineHeight: 1.5,
-              boxShadow: '0 1px 2px rgba(0,0,0,0.05)',
-              border: '1px solid #eee'
-            }}>
-              I'm going to ask you 16 questions. Takes about 7 minutes.
-            </div>
-            
-            <div style={{
-              maxWidth: '85%',
-              padding: '12px 16px',
-              borderRadius: '16px 16px 16px 4px',
-              background: '#fff',
-              color: '#000',
-              fontSize: '15px',
-              lineHeight: 1.5,
-              boxShadow: '0 1px 2px rgba(0,0,0,0.05)',
-              border: '1px solid #eee'
-            }}>
-              At the end, you'll get a voice profile — a file that captures who you are, who you're talking to, and how you should sound. Use it with any AI to create content that actually sounds like you.
-            </div>
-            
-            <div style={{
-              maxWidth: '85%',
-              padding: '12px 16px',
-              borderRadius: '16px 16px 16px 4px',
-              background: '#fff',
-              color: '#000',
-              fontSize: '15px',
-              lineHeight: 1.5,
-              boxShadow: '0 1px 2px rgba(0,0,0,0.05)',
-              border: '1px solid #eee'
-            }}>
-              Ready?
-            </div>
-          </div>
-        </div>
-        
-        <div style={{
-          padding: '16px 24px',
-          background: '#fff',
-          borderTop: '1px solid #eee'
-        }}>
-          <div style={{
-            maxWidth: '680px',
-            margin: '0 auto',
-            display: 'flex',
-            gap: '12px'
+            Linkyboss
+          </h1>
+
+          <p style={{
+            fontSize: '20px',
+            color: '#a0a0a0',
+            margin: '0 0 32px 0',
+            maxWidth: '500px',
+            lineHeight: 1.5
           }}>
-            <button
-              onClick={() => setStage('email')}
-              style={{
-                flex: 1,
-                background: '#000',
-                border: 'none',
-                padding: '14px',
-                fontSize: '15px',
-                fontWeight: 500,
-                color: '#fff',
-                borderRadius: '12px',
-                cursor: 'pointer',
-                transition: 'opacity 0.2s'
-              }}
-              onMouseOver={(e) => e.target.style.opacity = '0.85'}
-              onMouseOut={(e) => e.target.style.opacity = '1'}
-            >
-              Let's go
-            </button>
-          </div>
+            Find your founder voice.<br />
+            Create content that sounds like you.
+          </p>
+
+          <button
+            onClick={() => setStage('email')}
+            style={{
+              background: '#1a1a1a',
+              border: '1px solid #333',
+              padding: '16px 32px',
+              fontSize: '15px',
+              fontWeight: 500,
+              color: '#fff',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              marginBottom: '12px'
+            }}
+            onMouseOver={(e) => {
+              e.target.style.borderColor = '#4a4a4a';
+              e.target.style.background = '#222';
+            }}
+            onMouseOut={(e) => {
+              e.target.style.borderColor = '#333';
+              e.target.style.background = '#1a1a1a';
+            }}
+          >
+            Start Interview
+          </button>
+
+          <p style={{
+            fontSize: '13px',
+            color: '#666',
+            margin: '0'
+          }}>
+            Takes 7 minutes. Worth every second.
+          </p>
         </div>
       </div>
     );
@@ -360,67 +340,107 @@ export default function Linkyboss() {
     return (
       <div style={{
         minHeight: '100vh',
-        background: '#fff',
+        background: '#0a0a0a',
         fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        position: 'relative'
       }}>
+        {/* Amber gradient glow */}
+        <div className="amber-glow" />
+
+        {/* Header */}
         <div style={{
-          padding: '16px 24px',
-          background: '#fff',
-          borderBottom: '1px solid #eee',
+          padding: '20px 32px',
           display: 'flex',
           alignItems: 'center',
-          gap: '12px'
+          justifyContent: 'space-between',
+          position: 'relative',
+          zIndex: 1
         }}>
-          <div style={{
-            width: '36px',
-            height: '36px',
-            borderRadius: '50%',
-            background: '#000',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: '#fff',
-            fontSize: '14px',
-            fontWeight: 600
-          }}>L</div>
-          <div>
-            <div style={{ color: '#000', fontWeight: 500, fontSize: '15px' }}>Linkyboss</div>
-            <div style={{ color: '#999', fontSize: '12px' }}>online</div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div style={{
+              width: '32px',
+              height: '32px',
+              borderRadius: '50%',
+              background: '#1a1a1a',
+              border: '1px solid #333',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#fff',
+              fontSize: '16px',
+              fontWeight: 600
+            }}>✦</div>
+            <div style={{ color: '#fff', fontWeight: 500, fontSize: '15px' }}>Linkyboss</div>
+          </div>
+
+          <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+            <button style={{
+              background: 'transparent',
+              border: '1px solid #333',
+              padding: '8px 16px',
+              fontSize: '14px',
+              fontWeight: 500,
+              color: '#a0a0a0',
+              borderRadius: '8px',
+              cursor: 'pointer'
+            }}>
+              Open Control Center
+            </button>
+            <div style={{
+              width: '36px',
+              height: '36px',
+              borderRadius: '50%',
+              background: '#1a1a1a',
+              border: '1px solid #333',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#a0a0a0',
+              fontSize: '14px',
+              fontWeight: 500
+            }}>U</div>
           </div>
         </div>
 
+        {/* Card */}
         <div style={{
           flex: 1,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          padding: '24px'
+          padding: '24px',
+          position: 'relative',
+          zIndex: 1
         }}>
           <div style={{
-            maxWidth: '380px',
-            width: '100%'
+            maxWidth: '480px',
+            width: '100%',
+            background: '#1a1a1a',
+            border: '1px solid #333',
+            borderRadius: '12px',
+            padding: '40px'
           }}>
             <h2 style={{
               fontSize: '24px',
               fontWeight: 600,
-              color: '#000',
+              color: '#fff',
               margin: '0 0 8px 0',
               letterSpacing: '-0.5px'
             }}>
               Before we start
             </h2>
-            
+
             <p style={{
               fontSize: '15px',
-              color: '#666',
-              margin: '0 0 24px 0',
+              color: '#a0a0a0',
+              margin: '0 0 32px 0',
               lineHeight: 1.5
             }}>
-              Enter your email to receive your voice profile and future updates.
+              Enter your email to receive your voice profile and weekly insights.
             </p>
-            
+
             <input
               type="email"
               value={email}
@@ -431,45 +451,52 @@ export default function Linkyboss() {
                 width: '100%',
                 padding: '14px 16px',
                 fontSize: '15px',
-                background: '#fff',
-                border: '1px solid #ddd',
+                background: '#2a2a2a',
+                border: '1px solid #333',
                 borderRadius: '8px',
-                color: '#000',
+                color: '#fff',
                 outline: 'none',
-                marginBottom: '12px',
-                boxSizing: 'border-box',
-                transition: 'border-color 0.2s'
+                marginBottom: '16px',
+                boxSizing: 'border-box'
               }}
-              onFocus={(e) => e.target.style.borderColor = '#000'}
-              onBlur={(e) => e.target.style.borderColor = '#ddd'}
             />
-            
+
             <button
               onClick={startInterview}
               disabled={!email || !email.includes('@')}
               style={{
                 width: '100%',
-                background: email && email.includes('@') ? '#000' : '#eee',
-                border: 'none',
+                background: email && email.includes('@') ? '#1a1a1a' : '#1a1a1a',
+                border: email && email.includes('@') ? '1px solid #333' : '1px solid #2a2a2a',
                 padding: '14px',
                 fontSize: '15px',
                 fontWeight: 500,
-                color: email && email.includes('@') ? '#fff' : '#999',
+                color: email && email.includes('@') ? '#fff' : '#666',
                 borderRadius: '8px',
                 cursor: email && email.includes('@') ? 'pointer' : 'not-allowed',
-                transition: 'all 0.2s'
+                marginBottom: '16px'
+              }}
+              onMouseOver={(e) => {
+                if (email && email.includes('@')) {
+                  e.target.style.borderColor = '#4a4a4a';
+                }
+              }}
+              onMouseOut={(e) => {
+                if (email && email.includes('@')) {
+                  e.target.style.borderColor = '#333';
+                }
               }}
             >
               Continue
             </button>
-            
+
             <p style={{
               fontSize: '13px',
-              color: '#999',
-              marginTop: '12px',
+              color: '#666',
+              margin: '0',
               textAlign: 'center'
             }}>
-              No spam. Just your profile and occasional insights.
+              No spam. Just value.
             </p>
           </div>
         </div>
@@ -482,44 +509,86 @@ export default function Linkyboss() {
     return (
       <div style={{
         minHeight: '100vh',
-        background: '#fafafa',
+        background: '#0a0a0a',
         display: 'flex',
         flexDirection: 'column',
         fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
       }}>
+        {/* Header */}
         <div style={{
-          padding: '16px 24px',
-          background: '#fff',
-          borderBottom: '1px solid #eee',
+          padding: '20px 32px',
+          borderBottom: '1px solid #1a1a1a',
           display: 'flex',
           alignItems: 'center',
-          gap: '12px'
+          justifyContent: 'space-between'
         }}>
-          <div style={{
-            width: '36px',
-            height: '36px',
-            borderRadius: '50%',
-            background: '#000',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: '#fff',
-            fontSize: '14px',
-            fontWeight: 600
-          }}>L</div>
-          <div>
-            <div style={{ color: '#000', fontWeight: 500, fontSize: '15px' }}>Linkyboss</div>
-            <div style={{ color: '#999', fontSize: '12px' }}>
-              {isTyping ? 'typing...' : 'online'}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div style={{
+              width: '32px',
+              height: '32px',
+              borderRadius: '50%',
+              background: '#1a1a1a',
+              border: '1px solid #333',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#fff',
+              fontSize: '16px',
+              fontWeight: 600
+            }}>✦</div>
+            <div>
+              <div style={{ color: '#fff', fontWeight: 500, fontSize: '15px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                Linkyboss
+                <span style={{
+                  width: '6px',
+                  height: '6px',
+                  borderRadius: '50%',
+                  background: '#22c55e',
+                  display: 'inline-block'
+                }} />
+                <span style={{ color: '#a0a0a0', fontSize: '13px', fontWeight: 400 }}>
+                  {isTyping ? 'typing...' : 'online'}
+                </span>
+              </div>
             </div>
           </div>
+
+          <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+            <button style={{
+              background: 'transparent',
+              border: '1px solid #333',
+              padding: '8px 16px',
+              fontSize: '14px',
+              fontWeight: 500,
+              color: '#a0a0a0',
+              borderRadius: '8px',
+              cursor: 'pointer'
+            }}>
+              Open Control Center ▼
+            </button>
+            <div style={{
+              width: '36px',
+              height: '36px',
+              borderRadius: '50%',
+              background: '#1a1a1a',
+              border: '1px solid #333',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#a0a0a0',
+              fontSize: '14px',
+              fontWeight: 500,
+              cursor: 'pointer'
+            }}>▼</div>
+          </div>
         </div>
-        
+
+        {/* Chat area */}
         <div style={{
           flex: 1,
           overflowY: 'auto',
           padding: '24px',
-          maxWidth: '680px',
+          maxWidth: '700px',
           width: '100%',
           margin: '0 auto',
           boxSizing: 'border-box'
@@ -536,92 +605,64 @@ export default function Linkyboss() {
               <div style={{
                 maxWidth: '85%',
                 padding: '12px 16px',
-                borderRadius: msg.type === 'user' ? '16px 16px 4px 16px' : '16px 16px 16px 4px',
-                background: msg.type === 'user' ? '#000' : '#fff',
-                color: msg.type === 'user' ? '#fff' : '#000',
+                borderRadius: '12px',
+                background: msg.type === 'user' ? '#2a2a2a' : '#1a1a1a',
+                color: '#fff',
                 fontSize: '15px',
                 lineHeight: 1.5,
                 whiteSpace: 'pre-wrap',
-                boxShadow: msg.type === 'user' ? 'none' : '0 1px 2px rgba(0,0,0,0.05)',
-                border: msg.type === 'user' ? 'none' : '1px solid #eee'
+                border: '1px solid #333'
               }}>
                 {msg.text}
               </div>
             </div>
           ))}
-          
+
           {isTyping && (
             <div style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: '12px' }}>
               <div style={{
                 padding: '12px 16px',
-                borderRadius: '16px 16px 16px 4px',
-                background: '#fff',
-                border: '1px solid #eee',
-                color: '#999',
+                borderRadius: '12px',
+                background: '#1a1a1a',
+                border: '1px solid #333',
+                color: '#666',
                 fontSize: '14px'
               }}>
-                typing...
+                ...
               </div>
             </div>
           )}
-          
+
           <div ref={messagesEndRef} />
         </div>
-        
+
+        {/* Input bar */}
         <div style={{
-          padding: '16px 24px',
-          background: '#fff',
-          borderTop: '1px solid #eee'
+          padding: '20px 32px',
+          borderTop: '1px solid #1a1a1a'
         }}>
           <div style={{
-            maxWidth: '680px',
-            margin: '0 auto',
-            display: 'flex',
-            gap: '12px',
-            alignItems: 'flex-end'
+            maxWidth: '700px',
+            margin: '0 auto'
           }}>
-            <textarea
+            <input
+              type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder="Type your answer..."
-              rows={1}
+              placeholder="Type your answer and press Enter"
               style={{
-                flex: 1,
-                padding: '12px 16px',
+                width: '100%',
+                padding: '14px 16px',
                 fontSize: '15px',
-                background: '#fafafa',
-                border: '1px solid #eee',
-                borderRadius: '12px',
-                color: '#000',
+                background: '#2a2a2a',
+                border: '1px solid #333',
+                borderRadius: '8px',
+                color: '#fff',
                 outline: 'none',
-                resize: 'none',
-                fontFamily: 'inherit',
-                lineHeight: 1.5
+                boxSizing: 'border-box'
               }}
-              onFocus={(e) => e.target.style.borderColor = '#ccc'}
-              onBlur={(e) => e.target.style.borderColor = '#eee'}
             />
-            <button
-              onClick={handleSend}
-              disabled={!input.trim() || isTyping}
-              style={{
-                width: '44px',
-                height: '44px',
-                borderRadius: '12px',
-                border: 'none',
-                background: input.trim() && !isTyping ? '#000' : '#eee',
-                color: input.trim() && !isTyping ? '#fff' : '#999',
-                fontSize: '18px',
-                cursor: input.trim() && !isTyping ? 'pointer' : 'not-allowed',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                transition: 'all 0.2s'
-              }}
-            >
-              ↑
-            </button>
           </div>
         </div>
       </div>
@@ -633,69 +674,106 @@ export default function Linkyboss() {
     return (
       <div style={{
         minHeight: '100vh',
-        background: '#fff',
-        fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
+        background: '#0a0a0a',
+        fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+        position: 'relative'
       }}>
+        {/* Amber gradient glow */}
+        <div className="amber-glow" />
+
+        {/* Header */}
         <div style={{
-          padding: '16px 24px',
-          background: '#fff',
-          borderBottom: '1px solid #eee',
+          padding: '20px 32px',
+          borderBottom: '1px solid #1a1a1a',
           display: 'flex',
           alignItems: 'center',
-          gap: '12px'
+          justifyContent: 'space-between',
+          position: 'relative',
+          zIndex: 1
         }}>
-          <div style={{
-            width: '36px',
-            height: '36px',
-            borderRadius: '50%',
-            background: '#000',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: '#fff',
-            fontSize: '14px',
-            fontWeight: 600
-          }}>L</div>
-          <div>
-            <div style={{ color: '#000', fontWeight: 500, fontSize: '15px' }}>Linkyboss</div>
-            <div style={{ color: '#999', fontSize: '12px' }}>online</div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div style={{
+              width: '32px',
+              height: '32px',
+              borderRadius: '50%',
+              background: '#1a1a1a',
+              border: '1px solid #333',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#fff',
+              fontSize: '16px',
+              fontWeight: 600
+            }}>✦</div>
+            <div style={{ color: '#fff', fontWeight: 500, fontSize: '15px' }}>Linkyboss</div>
+          </div>
+
+          <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+            <button style={{
+              background: 'transparent',
+              border: '1px solid #333',
+              padding: '8px 16px',
+              fontSize: '14px',
+              fontWeight: 500,
+              color: '#a0a0a0',
+              borderRadius: '8px',
+              cursor: 'pointer'
+            }}>
+              Open Control Center
+            </button>
+            <div style={{
+              width: '36px',
+              height: '36px',
+              borderRadius: '50%',
+              background: '#1a1a1a',
+              border: '1px solid #333',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#a0a0a0',
+              fontSize: '14px',
+              fontWeight: 500
+            }}>U</div>
           </div>
         </div>
 
+        {/* Content */}
         <div style={{
-          maxWidth: '680px',
+          maxWidth: '800px',
           margin: '0 auto',
-          padding: '60px 24px'
+          padding: '60px 32px',
+          position: 'relative',
+          zIndex: 1
         }}>
           <h1 style={{
             fontSize: '32px',
             fontWeight: 600,
-            color: '#000',
+            color: '#fff',
             margin: '0 0 8px 0',
             letterSpacing: '-0.5px'
           }}>
             Your voice profile is ready
           </h1>
-          
+
           <p style={{
             fontSize: '15px',
-            color: '#666',
+            color: '#a0a0a0',
             margin: '0 0 32px 0'
           }}>
             Use this with any AI tool to create content that sounds like you.
           </p>
-          
+
           <div style={{
-            background: '#fafafa',
-            border: '1px solid #eee',
+            background: '#1a1a1a',
+            border: '1px solid #333',
             borderRadius: '12px',
-            padding: '20px',
+            padding: '24px',
             marginBottom: '24px',
             maxHeight: '400px',
             overflowY: 'auto'
           }}>
             <pre style={{
-              color: '#333',
+              color: '#a0a0a0',
               fontSize: '13px',
               lineHeight: 1.6,
               whiteSpace: 'pre-wrap',
@@ -705,35 +783,40 @@ export default function Linkyboss() {
               {voiceProfile}
             </pre>
           </div>
-          
+
           <button
             onClick={downloadProfile}
             style={{
-              background: '#000',
+              background: '#1a1a1a',
               color: '#fff',
-              border: 'none',
+              border: '1px solid #333',
               padding: '14px 28px',
               fontSize: '15px',
               fontWeight: 500,
               borderRadius: '8px',
-              cursor: 'pointer',
-              transition: 'opacity 0.2s'
+              cursor: 'pointer'
             }}
-            onMouseOver={(e) => e.target.style.opacity = '0.85'}
-            onMouseOut={(e) => e.target.style.opacity = '1'}
+            onMouseOver={(e) => {
+              e.target.style.borderColor = '#4a4a4a';
+              e.target.style.background = '#222';
+            }}
+            onMouseOut={(e) => {
+              e.target.style.borderColor = '#333';
+              e.target.style.background = '#1a1a1a';
+            }}
           >
             Download profile
           </button>
-          
+
           <div style={{
-            background: '#fafafa',
-            border: '1px solid #eee',
+            background: '#1a1a1a',
+            border: '1px solid #333',
             borderRadius: '12px',
             padding: '24px',
             marginTop: '40px'
           }}>
             <p style={{
-              color: '#000',
+              color: '#fff',
               fontSize: '15px',
               margin: '0 0 12px 0',
               fontWeight: 500
@@ -741,7 +824,7 @@ export default function Linkyboss() {
               This gets you 80% there.
             </p>
             <p style={{
-              color: '#666',
+              color: '#a0a0a0',
               fontSize: '14px',
               margin: '0 0 16px 0',
               lineHeight: 1.6
@@ -751,13 +834,15 @@ export default function Linkyboss() {
             <a
               href="#"
               style={{
-                color: '#000',
+                color: '#0077B5',
                 fontSize: '14px',
                 fontWeight: 500,
-                textDecoration: 'underline'
+                textDecoration: 'none'
               }}
+              onMouseOver={(e) => e.target.style.textDecoration = 'underline'}
+              onMouseOut={(e) => e.target.style.textDecoration = 'none'}
             >
-              Want help with that? Let's talk
+              Want help with that? Let's talk →
             </a>
           </div>
         </div>
