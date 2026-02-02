@@ -7,15 +7,15 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'bg-main': '#0a0a0a',
-        'bg-card': '#1a1a1a',
-        'bg-input': '#2a2a2a',
-        'border': '#333333',
-        'border-hover': '#4a4a4a',
+        'bg-main': '#1a1a2e',
+        'bg-card': '#16213e',
+        'bg-input': '#1f2b47',
+        'border': '#2d3a5c',
+        'border-hover': '#3d4f7c',
         'text-primary': '#ffffff',
-        'text-secondary': '#a0a0a0',
-        'text-muted': '#666666',
-        'accent-linkedin': '#0077B5',
+        'text-secondary': '#94a3b8',
+        'text-muted': '#64748b',
+        'accent-linkedin': '#0a66c2',
         'status-online': '#22c55e',
       },
       fontFamily: {

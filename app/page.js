@@ -3,13 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 
 const INTERVIEW_FLOW = [
-  { id: 'q1_intro', type: 'bot', message: "Let's go.\n\nWhat's your name?" },
-  { id: 'q1', type: 'question', field: 'name', message: null },
-  { 
-    id: 'q1_response', 
-    type: 'dynamic',
-    template: (data) => `${data.name.toUpperCase()}, WHAT IS YOUR PROFESSION?! AHOOO AHOOO AHOOO\n\n(Sorry, I really love Gerard Butler in 300.)\n\nBut seriously. What do you do? What's your role and company?`
-  },
+  { id: 'q1_response', type: 'dynamic', template: (data) => `${data.name.toUpperCase()}, WHAT IS YOUR PROFESSION?! AHOOO AHOOO AHOOO\n\n(Sorry, I really love Gerard Butler in 300.)\n\nBut seriously. What do you do? What's your role and company?` },
   { id: 'q2', type: 'question', field: 'role', message: null },
   { id: 'q3_intro', type: 'bot', message: "How'd you end up doing this? Give me the origin story." },
   { id: 'q3', type: 'question', field: 'origin', message: null },
@@ -98,8 +92,24 @@ If you want help with that, reach out to Dudu: [YOUR LINK HERE]
 `;
 };
 
+// Color constants for LinkedIn dark mode
+const colors = {
+  bgMain: '#1a1a2e',
+  bgCard: '#16213e',
+  bgInput: '#1f2b47',
+  border: '#2d3a5c',
+  borderHover: '#3d4f7c',
+  textPrimary: '#ffffff',
+  textSecondary: '#94a3b8',
+  textMuted: '#64748b',
+  accent: '#0a66c2',
+  accentHover: '#0077b5',
+  statusOnline: '#22c55e',
+};
+
 export default function Linkyboss() {
   const [stage, setStage] = useState('landing');
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
@@ -107,6 +117,7 @@ export default function Linkyboss() {
   const [userData, setUserData] = useState({});
   const [isTyping, setIsTyping] = useState(false);
   const [voiceProfile, setVoiceProfile] = useState('');
+  const [isSending, setIsSending] = useState(false);
   const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
@@ -126,24 +137,26 @@ export default function Linkyboss() {
   };
 
   const startInterview = () => {
-    if (!email || !email.includes('@')) return;
+    if (!name.trim()) return;
+    const initialUserData = { name: name.trim() };
+    setUserData(initialUserData);
     setStage('chat');
     setTimeout(() => {
-      processStep(0);
+      processStep(0, initialUserData);
     }, 500);
   };
 
   const processStep = (stepIndex, updatedUserData = null) => {
     if (stepIndex >= INTERVIEW_FLOW.length) return;
-    
+
     const step = INTERVIEW_FLOW[stepIndex];
     const dataToUse = updatedUserData || userData;
-    
+
     if (step.type === 'bot') {
       simulateTyping(() => {
         setMessages(prev => [...prev, { type: 'bot', text: step.message }]);
         setCurrentStep(stepIndex + 1);
-        
+
         const nextStep = INTERVIEW_FLOW[stepIndex + 1];
         if (nextStep && nextStep.type === 'question' && nextStep.message === null) {
           // Wait for user input
@@ -155,7 +168,7 @@ export default function Linkyboss() {
       simulateTyping(() => {
         setMessages(prev => [...prev, { type: 'bot', text: step.template(dataToUse) }]);
         setCurrentStep(stepIndex + 1);
-        
+
         const nextStep = INTERVIEW_FLOW[stepIndex + 1];
         if (nextStep && nextStep.type === 'question' && nextStep.message === null) {
           // Wait for user input
@@ -167,23 +180,23 @@ export default function Linkyboss() {
       setTimeout(() => {
         const profile = generateVoiceProfile(dataToUse);
         setVoiceProfile(profile);
-        setStage('complete');
+        setStage('email-capture');
       }, 1500);
     }
   };
 
   const handleSend = () => {
     if (!input.trim()) return;
-    
+
     const userMessage = input.trim();
     setMessages(prev => [...prev, { type: 'user', text: userMessage }]);
     setInput('');
-    
+
     const currentQuestion = INTERVIEW_FLOW[currentStep];
     if (currentQuestion && currentQuestion.type === 'question' && currentQuestion.field) {
       const newUserData = { ...userData, [currentQuestion.field]: userMessage };
       setUserData(newUserData);
-      
+
       const nextStep = currentStep + 1;
       setCurrentStep(nextStep);
       setTimeout(() => processStep(nextStep, newUserData), 300);
@@ -199,6 +212,19 @@ export default function Linkyboss() {
     }
   };
 
+  const handleEmailSubmit = async () => {
+    if (!email || !email.includes('@')) return;
+
+    setIsSending(true);
+
+    // Simulate sending email (replace with actual API call)
+    // In production, you'd call: await fetch('/api/send-email', { ... })
+    setTimeout(() => {
+      setIsSending(false);
+      setStage('complete');
+    }, 1500);
+  };
+
   const downloadProfile = () => {
     const blob = new Blob([voiceProfile], { type: 'text/markdown' });
     const url = URL.createObjectURL(blob);
@@ -209,19 +235,19 @@ export default function Linkyboss() {
     URL.revokeObjectURL(url);
   };
 
-  // Landing Page - Centered Style
+  // Landing Page with Name Input
   if (stage === 'landing') {
     return (
       <div style={{
         minHeight: '100vh',
-        background: '#0a0a0a',
+        background: colors.bgMain,
         display: 'flex',
         flexDirection: 'column',
         fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
         position: 'relative'
       }}>
-        {/* Amber gradient glow */}
-        <div className="amber-glow" />
+        {/* Blue gradient glow */}
+        <div className="blue-glow-bg" />
 
         {/* Header */}
         <div style={{
@@ -237,30 +263,17 @@ export default function Linkyboss() {
               width: '32px',
               height: '32px',
               borderRadius: '50%',
-              background: '#1a1a1a',
-              border: '1px solid #333',
+              background: colors.bgCard,
+              border: `1px solid ${colors.border}`,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: '#fff',
+              color: colors.accent,
               fontSize: '16px',
               fontWeight: 600
-            }}>✦</div>
-            <div style={{ color: '#fff', fontWeight: 500, fontSize: '15px' }}>Linkyboss</div>
+            }}>in</div>
+            <div style={{ color: colors.textPrimary, fontWeight: 500, fontSize: '15px' }}>Linkyboss</div>
           </div>
-
-          <button style={{
-            background: 'transparent',
-            border: '1px solid #333',
-            padding: '8px 16px',
-            fontSize: '14px',
-            fontWeight: 500,
-            color: '#a0a0a0',
-            borderRadius: '8px',
-            cursor: 'pointer'
-          }}>
-            Open Control Center
-          </button>
         </div>
 
         {/* Centered content */}
@@ -275,12 +288,16 @@ export default function Linkyboss() {
           position: 'relative',
           zIndex: 1
         }}>
-          <div style={{ fontSize: '32px', marginBottom: '24px' }}>✦</div>
+          <div style={{
+            fontSize: '40px',
+            marginBottom: '24px',
+            color: colors.accent
+          }}>in</div>
 
           <h1 style={{
             fontSize: '48px',
             fontWeight: 600,
-            color: '#fff',
+            color: colors.textPrimary,
             margin: '0 0 16px 0',
             letterSpacing: '-1px'
           }}>
@@ -289,8 +306,8 @@ export default function Linkyboss() {
 
           <p style={{
             fontSize: '20px',
-            color: '#a0a0a0',
-            margin: '0 0 32px 0',
+            color: colors.textSecondary,
+            margin: '0 0 40px 0',
             maxWidth: '500px',
             lineHeight: 1.5
           }}>
@@ -298,207 +315,102 @@ export default function Linkyboss() {
             Create content that sounds like you.
           </p>
 
-          <button
-            onClick={() => setStage('email')}
-            style={{
-              background: '#1a1a1a',
-              border: '1px solid #333',
-              padding: '16px 32px',
+          {/* Interview intro */}
+          <div style={{
+            background: colors.bgCard,
+            border: `1px solid ${colors.border}`,
+            borderRadius: '16px',
+            padding: '32px',
+            maxWidth: '480px',
+            width: '100%',
+            marginBottom: '24px'
+          }}>
+            <h2 style={{
+              fontSize: '20px',
+              fontWeight: 600,
+              color: colors.textPrimary,
+              margin: '0 0 12px 0'
+            }}>
+              Let's build your voice profile
+            </h2>
+            <p style={{
               fontSize: '15px',
-              fontWeight: 500,
-              color: '#fff',
-              borderRadius: '8px',
-              cursor: 'pointer',
-              marginBottom: '12px'
-            }}
-            onMouseOver={(e) => {
-              e.target.style.borderColor = '#4a4a4a';
-              e.target.style.background = '#222';
-            }}
-            onMouseOut={(e) => {
-              e.target.style.borderColor = '#333';
-              e.target.style.background = '#1a1a1a';
-            }}
-          >
-            Start Interview
-          </button>
+              color: colors.textSecondary,
+              margin: '0 0 24px 0',
+              lineHeight: 1.6
+            }}>
+              Answer 15 questions about your business, audience, and style.
+              At the end, you'll get a voice profile you can use with any AI tool to create content that sounds like you.
+            </p>
+
+            <div style={{ marginBottom: '16px' }}>
+              <label style={{
+                display: 'block',
+                fontSize: '14px',
+                fontWeight: 500,
+                color: colors.textSecondary,
+                marginBottom: '8px',
+                textAlign: 'left'
+              }}>
+                What's your name?
+              </label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && startInterview()}
+                placeholder="Your name"
+                style={{
+                  width: '100%',
+                  padding: '14px 16px',
+                  fontSize: '15px',
+                  background: colors.bgInput,
+                  border: `1px solid ${colors.border}`,
+                  borderRadius: '8px',
+                  color: colors.textPrimary,
+                  outline: 'none',
+                  boxSizing: 'border-box'
+                }}
+              />
+            </div>
+
+            <button
+              onClick={startInterview}
+              disabled={!name.trim()}
+              style={{
+                width: '100%',
+                background: name.trim() ? colors.accent : colors.bgInput,
+                border: 'none',
+                padding: '14px',
+                fontSize: '15px',
+                fontWeight: 500,
+                color: name.trim() ? colors.textPrimary : colors.textMuted,
+                borderRadius: '8px',
+                cursor: name.trim() ? 'pointer' : 'not-allowed',
+                transition: 'background 0.2s ease'
+              }}
+              onMouseOver={(e) => {
+                if (name.trim()) {
+                  e.target.style.background = colors.accentHover;
+                }
+              }}
+              onMouseOut={(e) => {
+                if (name.trim()) {
+                  e.target.style.background = colors.accent;
+                }
+              }}
+            >
+              Start Interview
+            </button>
+          </div>
 
           <p style={{
             fontSize: '13px',
-            color: '#666',
+            color: colors.textMuted,
             margin: '0'
           }}>
             Takes 7 minutes. Worth every second.
           </p>
-        </div>
-      </div>
-    );
-  }
-
-  // Email Capture
-  if (stage === 'email') {
-    return (
-      <div style={{
-        minHeight: '100vh',
-        background: '#0a0a0a',
-        fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
-        display: 'flex',
-        flexDirection: 'column',
-        position: 'relative'
-      }}>
-        {/* Amber gradient glow */}
-        <div className="amber-glow" />
-
-        {/* Header */}
-        <div style={{
-          padding: '20px 32px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          position: 'relative',
-          zIndex: 1
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{
-              width: '32px',
-              height: '32px',
-              borderRadius: '50%',
-              background: '#1a1a1a',
-              border: '1px solid #333',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#fff',
-              fontSize: '16px',
-              fontWeight: 600
-            }}>✦</div>
-            <div style={{ color: '#fff', fontWeight: 500, fontSize: '15px' }}>Linkyboss</div>
-          </div>
-
-          <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-            <button style={{
-              background: 'transparent',
-              border: '1px solid #333',
-              padding: '8px 16px',
-              fontSize: '14px',
-              fontWeight: 500,
-              color: '#a0a0a0',
-              borderRadius: '8px',
-              cursor: 'pointer'
-            }}>
-              Open Control Center
-            </button>
-            <div style={{
-              width: '36px',
-              height: '36px',
-              borderRadius: '50%',
-              background: '#1a1a1a',
-              border: '1px solid #333',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#a0a0a0',
-              fontSize: '14px',
-              fontWeight: 500
-            }}>U</div>
-          </div>
-        </div>
-
-        {/* Card */}
-        <div style={{
-          flex: 1,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '24px',
-          position: 'relative',
-          zIndex: 1
-        }}>
-          <div style={{
-            maxWidth: '480px',
-            width: '100%',
-            background: '#1a1a1a',
-            border: '1px solid #333',
-            borderRadius: '12px',
-            padding: '40px'
-          }}>
-            <h2 style={{
-              fontSize: '24px',
-              fontWeight: 600,
-              color: '#fff',
-              margin: '0 0 8px 0',
-              letterSpacing: '-0.5px'
-            }}>
-              Before we start
-            </h2>
-
-            <p style={{
-              fontSize: '15px',
-              color: '#a0a0a0',
-              margin: '0 0 32px 0',
-              lineHeight: 1.5
-            }}>
-              Enter your email to receive your voice profile and weekly insights.
-            </p>
-
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && startInterview()}
-              placeholder="you@company.com"
-              style={{
-                width: '100%',
-                padding: '14px 16px',
-                fontSize: '15px',
-                background: '#2a2a2a',
-                border: '1px solid #333',
-                borderRadius: '8px',
-                color: '#fff',
-                outline: 'none',
-                marginBottom: '16px',
-                boxSizing: 'border-box'
-              }}
-            />
-
-            <button
-              onClick={startInterview}
-              disabled={!email || !email.includes('@')}
-              style={{
-                width: '100%',
-                background: email && email.includes('@') ? '#1a1a1a' : '#1a1a1a',
-                border: email && email.includes('@') ? '1px solid #333' : '1px solid #2a2a2a',
-                padding: '14px',
-                fontSize: '15px',
-                fontWeight: 500,
-                color: email && email.includes('@') ? '#fff' : '#666',
-                borderRadius: '8px',
-                cursor: email && email.includes('@') ? 'pointer' : 'not-allowed',
-                marginBottom: '16px'
-              }}
-              onMouseOver={(e) => {
-                if (email && email.includes('@')) {
-                  e.target.style.borderColor = '#4a4a4a';
-                }
-              }}
-              onMouseOut={(e) => {
-                if (email && email.includes('@')) {
-                  e.target.style.borderColor = '#333';
-                }
-              }}
-            >
-              Continue
-            </button>
-
-            <p style={{
-              fontSize: '13px',
-              color: '#666',
-              margin: '0',
-              textAlign: 'center'
-            }}>
-              No spam. Just value.
-            </p>
-          </div>
         </div>
       </div>
     );
@@ -509,7 +421,7 @@ export default function Linkyboss() {
     return (
       <div style={{
         minHeight: '100vh',
-        background: '#0a0a0a',
+        background: colors.bgMain,
         display: 'flex',
         flexDirection: 'column',
         fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
@@ -517,7 +429,7 @@ export default function Linkyboss() {
         {/* Header */}
         <div style={{
           padding: '20px 32px',
-          borderBottom: '1px solid #1a1a1a',
+          borderBottom: `1px solid ${colors.border}`,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between'
@@ -527,59 +439,30 @@ export default function Linkyboss() {
               width: '32px',
               height: '32px',
               borderRadius: '50%',
-              background: '#1a1a1a',
-              border: '1px solid #333',
+              background: colors.bgCard,
+              border: `1px solid ${colors.border}`,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: '#fff',
+              color: colors.accent,
               fontSize: '16px',
               fontWeight: 600
-            }}>✦</div>
+            }}>in</div>
             <div>
-              <div style={{ color: '#fff', fontWeight: 500, fontSize: '15px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <div style={{ color: colors.textPrimary, fontWeight: 500, fontSize: '15px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                 Linkyboss
                 <span style={{
                   width: '6px',
                   height: '6px',
                   borderRadius: '50%',
-                  background: '#22c55e',
+                  background: colors.statusOnline,
                   display: 'inline-block'
                 }} />
-                <span style={{ color: '#a0a0a0', fontSize: '13px', fontWeight: 400 }}>
+                <span style={{ color: colors.textSecondary, fontSize: '13px', fontWeight: 400 }}>
                   {isTyping ? 'typing...' : 'online'}
                 </span>
               </div>
             </div>
-          </div>
-
-          <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-            <button style={{
-              background: 'transparent',
-              border: '1px solid #333',
-              padding: '8px 16px',
-              fontSize: '14px',
-              fontWeight: 500,
-              color: '#a0a0a0',
-              borderRadius: '8px',
-              cursor: 'pointer'
-            }}>
-              Open Control Center ▼
-            </button>
-            <div style={{
-              width: '36px',
-              height: '36px',
-              borderRadius: '50%',
-              background: '#1a1a1a',
-              border: '1px solid #333',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#a0a0a0',
-              fontSize: '14px',
-              fontWeight: 500,
-              cursor: 'pointer'
-            }}>▼</div>
           </div>
         </div>
 
@@ -606,12 +489,12 @@ export default function Linkyboss() {
                 maxWidth: '85%',
                 padding: '12px 16px',
                 borderRadius: '12px',
-                background: msg.type === 'user' ? '#2a2a2a' : '#1a1a1a',
-                color: '#fff',
+                background: msg.type === 'user' ? colors.accent : colors.bgCard,
+                color: colors.textPrimary,
                 fontSize: '15px',
                 lineHeight: 1.5,
                 whiteSpace: 'pre-wrap',
-                border: '1px solid #333'
+                border: msg.type === 'user' ? 'none' : `1px solid ${colors.border}`
               }}>
                 {msg.text}
               </div>
@@ -623,9 +506,9 @@ export default function Linkyboss() {
               <div style={{
                 padding: '12px 16px',
                 borderRadius: '12px',
-                background: '#1a1a1a',
-                border: '1px solid #333',
-                color: '#666',
+                background: colors.bgCard,
+                border: `1px solid ${colors.border}`,
+                color: colors.textMuted,
                 fontSize: '14px'
               }}>
                 ...
@@ -639,7 +522,7 @@ export default function Linkyboss() {
         {/* Input bar */}
         <div style={{
           padding: '20px 32px',
-          borderTop: '1px solid #1a1a1a'
+          borderTop: `1px solid ${colors.border}`
         }}>
           <div style={{
             maxWidth: '700px',
@@ -655,10 +538,10 @@ export default function Linkyboss() {
                 width: '100%',
                 padding: '14px 16px',
                 fontSize: '15px',
-                background: '#2a2a2a',
-                border: '1px solid #333',
+                background: colors.bgInput,
+                border: `1px solid ${colors.border}`,
                 borderRadius: '8px',
-                color: '#fff',
+                color: colors.textPrimary,
                 outline: 'none',
                 boxSizing: 'border-box'
               }}
@@ -669,22 +552,23 @@ export default function Linkyboss() {
     );
   }
 
-  // Complete
-  if (stage === 'complete') {
+  // Email Capture (after interview, before complete)
+  if (stage === 'email-capture') {
     return (
       <div style={{
         minHeight: '100vh',
-        background: '#0a0a0a',
+        background: colors.bgMain,
         fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+        display: 'flex',
+        flexDirection: 'column',
         position: 'relative'
       }}>
-        {/* Amber gradient glow */}
-        <div className="amber-glow" />
+        {/* Blue gradient glow */}
+        <div className="blue-glow-bg" />
 
         {/* Header */}
         <div style={{
           padding: '20px 32px',
-          borderBottom: '1px solid #1a1a1a',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -696,44 +580,170 @@ export default function Linkyboss() {
               width: '32px',
               height: '32px',
               borderRadius: '50%',
-              background: '#1a1a1a',
-              border: '1px solid #333',
+              background: colors.bgCard,
+              border: `1px solid ${colors.border}`,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: '#fff',
+              color: colors.accent,
               fontSize: '16px',
               fontWeight: 600
-            }}>✦</div>
-            <div style={{ color: '#fff', fontWeight: 500, fontSize: '15px' }}>Linkyboss</div>
+            }}>in</div>
+            <div style={{ color: colors.textPrimary, fontWeight: 500, fontSize: '15px' }}>Linkyboss</div>
           </div>
+        </div>
 
-          <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-            <button style={{
-              background: 'transparent',
-              border: '1px solid #333',
-              padding: '8px 16px',
-              fontSize: '14px',
-              fontWeight: 500,
-              color: '#a0a0a0',
-              borderRadius: '8px',
-              cursor: 'pointer'
-            }}>
-              Open Control Center
-            </button>
+        {/* Card */}
+        <div style={{
+          flex: 1,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '24px',
+          position: 'relative',
+          zIndex: 1
+        }}>
+          <div style={{
+            maxWidth: '480px',
+            width: '100%',
+            background: colors.bgCard,
+            border: `1px solid ${colors.border}`,
+            borderRadius: '16px',
+            padding: '40px'
+          }}>
             <div style={{
-              width: '36px',
-              height: '36px',
+              width: '48px',
+              height: '48px',
               borderRadius: '50%',
-              background: '#1a1a1a',
-              border: '1px solid #333',
+              background: `${colors.accent}20`,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: '#a0a0a0',
-              fontSize: '14px',
-              fontWeight: 500
-            }}>U</div>
+              marginBottom: '24px'
+            }}>
+              <span style={{ fontSize: '24px' }}>✓</span>
+            </div>
+
+            <h2 style={{
+              fontSize: '24px',
+              fontWeight: 600,
+              color: colors.textPrimary,
+              margin: '0 0 8px 0',
+              letterSpacing: '-0.5px'
+            }}>
+              Your voice profile is ready, {userData.name}!
+            </h2>
+
+            <p style={{
+              fontSize: '15px',
+              color: colors.textSecondary,
+              margin: '0 0 32px 0',
+              lineHeight: 1.5
+            }}>
+              Enter your email and we'll send you your voice profile along with a guide on how to use it.
+            </p>
+
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              onKeyPress={(e) => e.key === 'Enter' && handleEmailSubmit()}
+              placeholder="you@company.com"
+              style={{
+                width: '100%',
+                padding: '14px 16px',
+                fontSize: '15px',
+                background: colors.bgInput,
+                border: `1px solid ${colors.border}`,
+                borderRadius: '8px',
+                color: colors.textPrimary,
+                outline: 'none',
+                marginBottom: '16px',
+                boxSizing: 'border-box'
+              }}
+            />
+
+            <button
+              onClick={handleEmailSubmit}
+              disabled={!email || !email.includes('@') || isSending}
+              style={{
+                width: '100%',
+                background: email && email.includes('@') && !isSending ? colors.accent : colors.bgInput,
+                border: 'none',
+                padding: '14px',
+                fontSize: '15px',
+                fontWeight: 500,
+                color: email && email.includes('@') && !isSending ? colors.textPrimary : colors.textMuted,
+                borderRadius: '8px',
+                cursor: email && email.includes('@') && !isSending ? 'pointer' : 'not-allowed',
+                marginBottom: '16px',
+                transition: 'background 0.2s ease'
+              }}
+              onMouseOver={(e) => {
+                if (email && email.includes('@') && !isSending) {
+                  e.target.style.background = colors.accentHover;
+                }
+              }}
+              onMouseOut={(e) => {
+                if (email && email.includes('@') && !isSending) {
+                  e.target.style.background = colors.accent;
+                }
+              }}
+            >
+              {isSending ? 'Sending...' : 'Send My Voice Profile'}
+            </button>
+
+            <p style={{
+              fontSize: '13px',
+              color: colors.textMuted,
+              margin: '0',
+              textAlign: 'center'
+            }}>
+              We'll also send you tips on getting the most out of your profile.
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Complete
+  if (stage === 'complete') {
+    return (
+      <div style={{
+        minHeight: '100vh',
+        background: colors.bgMain,
+        fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+        position: 'relative'
+      }}>
+        {/* Blue gradient glow */}
+        <div className="blue-glow-bg" />
+
+        {/* Header */}
+        <div style={{
+          padding: '20px 32px',
+          borderBottom: `1px solid ${colors.border}`,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          position: 'relative',
+          zIndex: 1
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div style={{
+              width: '32px',
+              height: '32px',
+              borderRadius: '50%',
+              background: colors.bgCard,
+              border: `1px solid ${colors.border}`,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: colors.accent,
+              fontSize: '16px',
+              fontWeight: 600
+            }}>in</div>
+            <div style={{ color: colors.textPrimary, fontWeight: 500, fontSize: '15px' }}>Linkyboss</div>
           </div>
         </div>
 
@@ -745,78 +755,103 @@ export default function Linkyboss() {
           position: 'relative',
           zIndex: 1
         }}>
+          <div style={{
+            width: '64px',
+            height: '64px',
+            borderRadius: '50%',
+            background: `${colors.statusOnline}20`,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginBottom: '24px'
+          }}>
+            <span style={{ fontSize: '32px' }}>✓</span>
+          </div>
+
           <h1 style={{
             fontSize: '32px',
             fontWeight: 600,
-            color: '#fff',
+            color: colors.textPrimary,
             margin: '0 0 8px 0',
             letterSpacing: '-0.5px'
           }}>
-            Your voice profile is ready
+            Check your inbox!
           </h1>
 
           <p style={{
             fontSize: '15px',
-            color: '#a0a0a0',
+            color: colors.textSecondary,
             margin: '0 0 32px 0'
           }}>
-            Use this with any AI tool to create content that sounds like you.
+            We've sent your voice profile and usage guide to <strong style={{ color: colors.textPrimary }}>{email}</strong>
           </p>
 
           <div style={{
-            background: '#1a1a1a',
-            border: '1px solid #333',
+            background: colors.bgCard,
+            border: `1px solid ${colors.border}`,
             borderRadius: '12px',
             padding: '24px',
-            marginBottom: '24px',
-            maxHeight: '400px',
-            overflowY: 'auto'
+            marginBottom: '24px'
           }}>
-            <pre style={{
-              color: '#a0a0a0',
-              fontSize: '13px',
-              lineHeight: 1.6,
-              whiteSpace: 'pre-wrap',
-              margin: 0,
-              fontFamily: "'SF Mono', 'Fira Code', 'Consolas', monospace"
+            <h3 style={{
+              fontSize: '16px',
+              fontWeight: 600,
+              color: colors.textPrimary,
+              margin: '0 0 12px 0'
             }}>
-              {voiceProfile}
-            </pre>
+              Preview your voice profile
+            </h3>
+            <div style={{
+              maxHeight: '300px',
+              overflowY: 'auto'
+            }}>
+              <pre style={{
+                color: colors.textSecondary,
+                fontSize: '13px',
+                lineHeight: 1.6,
+                whiteSpace: 'pre-wrap',
+                margin: 0,
+                fontFamily: "'SF Mono', 'Fira Code', 'Consolas', monospace"
+              }}>
+                {voiceProfile}
+              </pre>
+            </div>
           </div>
 
           <button
             onClick={downloadProfile}
             style={{
-              background: '#1a1a1a',
-              color: '#fff',
-              border: '1px solid #333',
+              background: colors.bgCard,
+              color: colors.textPrimary,
+              border: `1px solid ${colors.border}`,
               padding: '14px 28px',
               fontSize: '15px',
               fontWeight: 500,
               borderRadius: '8px',
-              cursor: 'pointer'
+              cursor: 'pointer',
+              transition: 'all 0.2s ease'
             }}
             onMouseOver={(e) => {
-              e.target.style.borderColor = '#4a4a4a';
-              e.target.style.background = '#222';
+              e.target.style.borderColor = colors.borderHover;
+              e.target.style.background = colors.bgInput;
             }}
             onMouseOut={(e) => {
-              e.target.style.borderColor = '#333';
-              e.target.style.background = '#1a1a1a';
+              e.target.style.borderColor = colors.border;
+              e.target.style.background = colors.bgCard;
             }}
           >
             Download profile
           </button>
 
           <div style={{
-            background: '#1a1a1a',
-            border: '1px solid #333',
+            background: colors.bgCard,
+            border: `1px solid ${colors.border}`,
             borderRadius: '12px',
             padding: '24px',
             marginTop: '40px'
           }}>
             <p style={{
-              color: '#fff',
+              color: colors.textPrimary,
               fontSize: '15px',
               margin: '0 0 12px 0',
               fontWeight: 500
@@ -824,7 +859,7 @@ export default function Linkyboss() {
               This gets you 80% there.
             </p>
             <p style={{
-              color: '#a0a0a0',
+              color: colors.textSecondary,
               fontSize: '14px',
               margin: '0 0 16px 0',
               lineHeight: 1.6
@@ -834,7 +869,7 @@ export default function Linkyboss() {
             <a
               href="#"
               style={{
-                color: '#0077B5',
+                color: colors.accent,
                 fontSize: '14px',
                 fontWeight: 500,
                 textDecoration: 'none'
@@ -842,7 +877,7 @@ export default function Linkyboss() {
               onMouseOver={(e) => e.target.style.textDecoration = 'underline'}
               onMouseOut={(e) => e.target.style.textDecoration = 'none'}
             >
-              Want help with that? Let's talk →
+              Want help with that? Let's talk
             </a>
           </div>
         </div>
