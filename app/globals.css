@@ -41,6 +41,6 @@ button, input, textarea {
 /* Focus ring */
 input:focus, textarea:focus {
   outline: none;
-  border-color: #4a4a4a;
-  box-shadow: 0 0 0 3px rgba(0, 119, 181, 0.15);
+  border-color: #3d4f7c;
+  box-shadow: 0 0 0 3px rgba(10, 102, 194, 0.2);
 }

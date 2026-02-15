@@ -5,12 +5,31 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
+    "@a5c-ai/babysitter-sdk": "^0.0.162",
+    "@anthropic-ai/sdk": "^0.74.0",
+    "@auth/drizzle-adapter": "^1.11.1",
+    "@neondatabase/serverless": "^1.0.2",
+    "@rainbow-me/rainbowkit": "^2.2.10",
+    "@tanstack/react-query": "^5.90.20",
+    "@walletconnect/ethereum-provider": "^2.23.4",
+    "bcryptjs": "^3.0.3",
+    "drizzle-kit": "^0.31.9",
+    "drizzle-orm": "^0.45.1",
     "next": "^14.2.35",
+    "next-auth": "^5.0.0-beta.30",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "siwe": "^3.0.0",
+    "viem": "^2.45.2",
+    "wagmi": "^2.19.5",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.24",
