@@ -499,7 +499,7 @@ export default function DashboardPage() {
               margin: '0 0 28px 0', maxWidth: '400px',
               marginLeft: 'auto', marginRight: 'auto', lineHeight: 1.5,
             }}>
-              Complete the Linkyboss interview to create your first voice profile. It takes about 7 minutes.
+              Complete the Linkyboss interview to create your first voice profile. It takes about 4 minutes.
             </p>
             <Link href="/" style={{
               display: 'inline-block',

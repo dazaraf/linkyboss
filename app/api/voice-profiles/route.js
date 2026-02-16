@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { voiceProfiles } from "@/lib/db/schema";
-import { eq, desc } from "drizzle-orm";
+import { eq, desc, ne, and } from "drizzle-orm";
 import { generateVoiceProfile } from "@/lib/voice-profile";
 
 export async function POST(request) {
@@ -94,7 +94,12 @@ export async function GET() {
         isActive: voiceProfiles.isActive,
       })
       .from(voiceProfiles)
-      .where(eq(voiceProfiles.userId, session.user.id))
+      .where(
+        and(
+          eq(voiceProfiles.userId, session.user.id),
+          ne(voiceProfiles.name, "__INTERVIEW_DRAFT__")
+        )
+      )
       .orderBy(desc(voiceProfiles.createdAt));
 
     return NextResponse.json({ profiles });
