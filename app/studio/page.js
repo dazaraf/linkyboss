@@ -6,16 +6,17 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 
 const colors = {
-  bgMain: '#1a1a2e',
-  bgCard: '#16213e',
-  bgInput: '#1f2b47',
-  border: '#2d3a5c',
-  borderHover: '#3d4f7c',
-  textPrimary: '#ffffff',
-  textSecondary: '#94a3b8',
-  textMuted: '#64748b',
-  accent: '#0a66c2',
-  accentHover: '#0077b5',
+  bgMain: '#FFFFFF',
+  bgCard: '#F9F9F9',
+  bgInput: '#FFFFFF',
+  border: '#E8E8E8',
+  borderHover: '#E8E8E8',
+  textPrimary: '#1C1C1C',
+  textSecondary: '#555555',
+  textMuted: '#888888',
+  accent: '#FF6B35',
+  accentHover: '#E8571F',
+  accentLight: '#FFF3EE',
   statusOnline: '#22c55e',
   error: '#ef4444',
   errorBg: 'rgba(239, 68, 68, 0.1)',
@@ -46,7 +47,7 @@ function getScoreColor(score) {
 }
 
 function getScoreLabel(score) {
-  if (score >= 90) return 'Sounds like you';
+  if (score >= 90) return 'Sounds Like You';
   if (score >= 70) return 'Needs tweaks';
   return 'Too AI-ish';
 }
@@ -62,13 +63,13 @@ export default function StudioPageWrapper() {
     <Suspense fallback={
       <div style={{
         minHeight: '100vh',
-        background: '#1a1a2e',
+        background: '#FFFFFF',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
       }}>
-        <p style={{ color: '#94a3b8', fontSize: '16px' }}>Loading...</p>
+        <p style={{ color: '#555555', fontSize: '16px' }}>Loading...</p>
       </div>
     }>
       <StudioPage />
@@ -102,6 +103,7 @@ function StudioPage() {
   const [copySuccess, setCopySuccess] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
   const [streamError, setStreamError] = useState('');
+  const [focusedField, setFocusedField] = useState(null);
 
   const contentRef = useRef(null);
 
@@ -309,6 +311,7 @@ function StudioPage() {
       {/* Header */}
       <div style={{
         padding: '16px 24px',
+        background: '#FFFFFF',
         borderBottom: `1px solid ${colors.border}`,
         display: 'flex',
         alignItems: 'center',
@@ -316,14 +319,11 @@ function StudioPage() {
         flexShrink: 0,
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
-          <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <div style={{
-              width: '30px', height: '30px', borderRadius: '50%',
-              background: colors.bgCard, border: `1px solid ${colors.border}`,
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              color: colors.accent, fontSize: '14px', fontWeight: 600,
-            }}>in</div>
-            <span style={{ color: colors.textPrimary, fontWeight: 500, fontSize: '15px' }}>Linkyboss</span>
+          <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <span style={{ color: '#1C1C1C', fontWeight: 700, fontSize: '16px', letterSpacing: '-0.3px' }}>
+              linkyboss
+            </span>
+            <span style={{ color: colors.accent, fontSize: '10px', lineHeight: 1 }}>&#9679;</span>
           </Link>
 
           <nav style={{ display: 'flex', gap: '6px' }}>
@@ -333,7 +333,8 @@ function StudioPage() {
             }}>Dashboard</Link>
             <span style={{
               padding: '6px 14px', borderRadius: '6px', fontSize: '14px',
-              fontWeight: 500, color: colors.textPrimary, background: colors.bgInput,
+              fontWeight: 500, color: colors.textPrimary, background: colors.bgCard,
+              border: `1px solid ${colors.border}`,
             }}>Content Studio</span>
           </nav>
         </div>
@@ -345,11 +346,35 @@ function StudioPage() {
         </div>
       </div>
 
+      {/* Page heading */}
+      <div style={{
+        padding: '28px 32px 0 32px',
+        flexShrink: 0,
+      }}>
+        <h1 style={{
+          margin: '0 0 4px 0',
+          fontSize: '22px',
+          fontWeight: 700,
+          color: colors.textPrimary,
+          letterSpacing: '-0.3px',
+        }}>
+          Content Studio
+        </h1>
+        <p style={{
+          margin: 0,
+          fontSize: '14px',
+          color: colors.textSecondary,
+        }}>
+          Generate posts that sound like you.
+        </p>
+      </div>
+
       {/* Main content: two-panel layout */}
       <div style={{
         flex: 1,
         display: 'flex',
         overflow: 'hidden',
+        marginTop: '20px',
       }}>
         {/* LEFT PANEL - Controls */}
         <div style={{
@@ -361,6 +386,7 @@ function StudioPage() {
           display: 'flex',
           flexDirection: 'column',
           gap: '20px',
+          background: '#FFFFFF',
         }}>
           {/* Voice Profile Selector */}
           <div>
@@ -373,13 +399,13 @@ function StudioPage() {
             </label>
             {loadingProfiles ? (
               <div style={{
-                padding: '12px 16px', background: colors.bgInput,
+                padding: '12px 16px', background: colors.bgCard,
                 borderRadius: '8px', border: `1px solid ${colors.border}`,
                 color: colors.textMuted, fontSize: '14px',
               }}>Loading profiles...</div>
             ) : profiles.length === 0 ? (
               <div style={{
-                padding: '16px', background: colors.bgInput,
+                padding: '16px', background: colors.bgCard,
                 borderRadius: '8px', border: `1px solid ${colors.border}`,
                 textAlign: 'center',
               }}>
@@ -403,14 +429,14 @@ function StudioPage() {
                   borderRadius: '8px', color: colors.textPrimary,
                   outline: 'none', cursor: 'pointer',
                   appearance: 'none',
-                  backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M6 8L1 3h10z'/%3E%3C/svg%3E")`,
+                  backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23888888' d='M6 8L1 3h10z'/%3E%3C/svg%3E")`,
                   backgroundRepeat: 'no-repeat',
                   backgroundPosition: 'right 12px center',
                 }}
               >
-                <option value="" style={{ background: colors.bgInput }}>Select a profile...</option>
+                <option value="" style={{ background: '#FFFFFF' }}>Select a profile...</option>
                 {profiles.map(p => (
-                  <option key={p.id} value={p.id} style={{ background: colors.bgInput }}>
+                  <option key={p.id} value={p.id} style={{ background: '#FFFFFF' }}>
                     {p.name}
                   </option>
                 ))}
@@ -418,7 +444,7 @@ function StudioPage() {
             )}
           </div>
 
-          {/* Post Type Grid */}
+          {/* Post Type Pills */}
           <div>
             <label style={{
               display: 'block', fontSize: '13px', fontWeight: 600,
@@ -428,8 +454,8 @@ function StudioPage() {
               Post Type
             </label>
             <div style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
+              display: 'flex',
+              flexWrap: 'wrap',
               gap: '8px',
             }}>
               {POST_TYPES.map(pt => {
@@ -439,24 +465,19 @@ function StudioPage() {
                     key={pt.id}
                     onClick={() => setSelectedPostType(pt.id)}
                     style={{
-                      padding: '12px 10px',
-                      background: isSelected ? `${colors.accent}20` : colors.bgInput,
-                      border: `1px solid ${isSelected ? colors.accent : colors.border}`,
-                      borderRadius: '8px',
+                      padding: '8px 16px',
+                      background: isSelected ? colors.accent : '#FFFFFF',
+                      border: isSelected ? 'none' : `1px solid ${colors.border}`,
+                      borderRadius: '20px',
                       cursor: 'pointer',
-                      textAlign: 'left',
+                      fontSize: '13px',
+                      fontWeight: 500,
+                      color: isSelected ? '#FFFFFF' : colors.textSecondary,
                       transition: 'all 0.15s ease',
+                      fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
                     }}
                   >
-                    <div style={{
-                      fontSize: '13px', fontWeight: 600,
-                      color: isSelected ? colors.accent : colors.textPrimary,
-                      marginBottom: '2px',
-                    }}>{pt.label}</div>
-                    <div style={{
-                      fontSize: '11px',
-                      color: colors.textMuted,
-                    }}>{pt.desc}</div>
+                    {pt.label}
                   </button>
                 );
               })}
@@ -475,15 +496,19 @@ function StudioPage() {
             <textarea
               value={topic}
               onChange={(e) => setTopic(e.target.value)}
-              placeholder="What do you want to write about?"
+              onFocus={() => setFocusedField('topic')}
+              onBlur={() => setFocusedField(null)}
+              placeholder="What do you want to post about?"
               rows={3}
               style={{
                 width: '100%', padding: '12px 16px', fontSize: '14px',
-                background: colors.bgInput, border: `1px solid ${colors.border}`,
+                background: colors.bgInput,
+                border: `1px solid ${focusedField === 'topic' ? colors.accent : colors.border}`,
                 borderRadius: '8px', color: colors.textPrimary,
                 outline: 'none', resize: 'vertical', lineHeight: 1.5,
                 fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
                 boxSizing: 'border-box',
+                transition: 'border-color 0.15s ease',
               }}
             />
           </div>
@@ -501,20 +526,24 @@ function StudioPage() {
             <textarea
               value={additionalContext}
               onChange={(e) => setAdditionalContext(e.target.value)}
+              onFocus={() => setFocusedField('context')}
+              onBlur={() => setFocusedField(null)}
               placeholder="Specific angle, audience, or details..."
               rows={2}
               style={{
                 width: '100%', padding: '12px 16px', fontSize: '14px',
-                background: colors.bgInput, border: `1px solid ${colors.border}`,
+                background: colors.bgInput,
+                border: `1px solid ${focusedField === 'context' ? colors.accent : colors.border}`,
                 borderRadius: '8px', color: colors.textPrimary,
                 outline: 'none', resize: 'vertical', lineHeight: 1.5,
                 fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
                 boxSizing: 'border-box',
+                transition: 'border-color 0.15s ease',
               }}
             />
           </div>
 
-          {/* Generate / Regenerate Button */}
+          {/* Write It / Regenerate Button */}
           <button
             onClick={handleGenerate}
             disabled={!canGenerate || isGenerating}
@@ -526,13 +555,14 @@ function StudioPage() {
               borderRadius: '8px',
               border: 'none',
               cursor: canGenerate && !isGenerating ? 'pointer' : 'not-allowed',
-              background: canGenerate && !isGenerating ? colors.accent : colors.bgInput,
-              color: canGenerate && !isGenerating ? colors.textPrimary : colors.textMuted,
+              background: canGenerate && !isGenerating ? colors.accent : colors.bgCard,
+              color: canGenerate && !isGenerating ? '#FFFFFF' : colors.textMuted,
               transition: 'all 0.2s ease',
               animation: isGenerating ? 'pulse 2s ease-in-out infinite' : 'none',
+              fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
             }}
           >
-            {isGenerating ? 'Generating...' : hasGenerated ? 'Regenerate' : 'Generate Post'}
+            {isGenerating ? 'Generating...' : hasGenerated ? 'Regenerate' : 'Write It'}
           </button>
 
           {streamError && (
@@ -573,32 +603,32 @@ function StudioPage() {
               }}>
                 <div style={{
                   width: '56px', height: '56px', borderRadius: '50%',
-                  background: `${colors.accent}15`,
+                  background: colors.accentLight,
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   margin: '0 auto 20px auto',
-                  color: colors.accent, fontSize: '24px', fontWeight: 600,
-                }}>in</div>
+                  color: colors.accent, fontSize: '24px', fontWeight: 700,
+                }}>&#9998;</div>
                 <h3 style={{
                   fontSize: '18px', fontWeight: 600,
                   color: colors.textPrimary, margin: '0 0 8px 0',
                 }}>
-                  AI Content Studio
+                  Content Studio
                 </h3>
                 <p style={{
                   color: colors.textMuted, fontSize: '14px',
                   margin: 0, lineHeight: 1.5,
                 }}>
-                  Select a voice profile and post type, write your topic, then hit Generate.
+                  Select a voice profile and post type, write your topic, then hit Write It.
                 </p>
               </div>
             </div>
           )}
 
-          {/* LinkedIn Post Mockup */}
+          {/* Output Card */}
           {(isGenerating || hasGenerated) && (
             <>
               <div style={{
-                background: colors.bgCard,
+                background: '#FFFFFF',
                 border: `1px solid ${colors.border}`,
                 borderRadius: '12px',
                 overflow: 'hidden',
@@ -610,10 +640,11 @@ function StudioPage() {
                   alignItems: 'center',
                   gap: '12px',
                   borderBottom: `1px solid ${colors.border}`,
+                  background: colors.bgCard,
                 }}>
                   <div style={{
                     width: '44px', height: '44px', borderRadius: '50%',
-                    background: `${colors.accent}30`,
+                    background: colors.accentLight,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     color: colors.accent, fontSize: '16px', fontWeight: 700,
                     flexShrink: 0,
@@ -634,7 +665,7 @@ function StudioPage() {
                   </div>
                 </div>
 
-                {/* Post body - editable */}
+                {/* Post body - editable textarea */}
                 <div style={{ padding: '16px 20px' }}>
                   <textarea
                     ref={contentRef}
@@ -662,6 +693,7 @@ function StudioPage() {
                 <div style={{
                   padding: '12px 20px',
                   borderTop: `1px solid ${colors.border}`,
+                  background: colors.bgCard,
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'center',
@@ -689,7 +721,7 @@ function StudioPage() {
               {/* Authenticity Score */}
               {authenticityScore !== null && (
                 <div style={{
-                  background: colors.bgCard,
+                  background: '#FFFFFF',
                   border: `1px solid ${colors.border}`,
                   borderRadius: '12px',
                   padding: '20px',
@@ -703,8 +735,8 @@ function StudioPage() {
                     <div style={{
                       width: '72px', height: '72px',
                       borderRadius: '50%',
-                      background: getScoreBg(authenticityScore),
-                      border: `3px solid ${getScoreColor(authenticityScore)}`,
+                      background: colors.accentLight,
+                      border: `3px solid ${colors.accent}`,
                       display: 'flex',
                       flexDirection: 'column',
                       alignItems: 'center',
@@ -713,7 +745,7 @@ function StudioPage() {
                     }}>
                       <span style={{
                         fontSize: '22px', fontWeight: 700,
-                        color: getScoreColor(authenticityScore),
+                        color: colors.accent,
                         lineHeight: 1,
                       }}>
                         {authenticityScore}
@@ -723,13 +755,13 @@ function StudioPage() {
                     <div style={{ flex: 1 }}>
                       <div style={{
                         fontSize: '15px', fontWeight: 600,
-                        color: getScoreColor(authenticityScore),
+                        color: colors.accent,
                         marginBottom: '4px',
                       }}>
                         {getScoreLabel(authenticityScore)}
                       </div>
-                      <div style={{ fontSize: '13px', color: colors.textMuted, marginBottom: '8px' }}>
-                        Voice Authenticity Score
+                      <div style={{ fontSize: '13px', color: colors.textSecondary, marginBottom: '8px' }}>
+                        Sounds Like You
                       </div>
 
                       {/* Flag chips */}
@@ -774,19 +806,16 @@ function StudioPage() {
                       fontSize: '14px',
                       fontWeight: 600,
                       borderRadius: '8px',
-                      border: 'none',
+                      border: `1px solid ${colors.border}`,
                       cursor: hasEdited ? 'pointer' : 'not-allowed',
                       background: copySuccess
                         ? colors.greenBg
-                        : hasEdited
-                          ? colors.accent
-                          : colors.bgInput,
+                        : '#F9F9F9',
                       color: copySuccess
                         ? colors.statusOnline
-                        : hasEdited
-                          ? colors.textPrimary
-                          : colors.textMuted,
+                        : colors.textPrimary,
                       transition: 'all 0.2s ease',
+                      fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
                     }}
                   >
                     {copySuccess ? 'Copied!' : 'Copy'}
@@ -802,9 +831,10 @@ function StudioPage() {
                       borderRadius: '8px',
                       border: `1px solid ${colors.border}`,
                       cursor: draftId ? 'pointer' : 'not-allowed',
-                      background: saveSuccess ? colors.greenBg : 'transparent',
-                      color: saveSuccess ? colors.statusOnline : colors.textSecondary,
+                      background: saveSuccess ? colors.greenBg : '#F9F9F9',
+                      color: saveSuccess ? colors.statusOnline : colors.textPrimary,
                       transition: 'all 0.2s ease',
+                      fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
                     }}
                   >
                     {saveSuccess ? 'Saved!' : 'Save Draft'}
@@ -827,11 +857,11 @@ function StudioPage() {
               {hasGenerated && (
                 <div style={{
                   padding: '14px 18px',
-                  background: `${colors.accent}08`,
+                  background: colors.accentLight,
                   border: `1px solid ${colors.accent}25`,
                   borderRadius: '8px',
                   fontSize: '13px',
-                  color: colors.textMuted,
+                  color: colors.textSecondary,
                   lineHeight: 1.5,
                 }}>
                   Paste into LinkedIn manually. The last 20% is yours.

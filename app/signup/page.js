@@ -9,25 +9,25 @@ import dynamic from "next/dynamic";
 const WalletSection = dynamic(() => import("../signin/wallet-section"), { ssr: false });
 
 const colors = {
-  bgMain: '#1a1a2e',
-  bgCard: '#16213e',
-  bgInput: '#1f2b47',
-  border: '#2d3a5c',
-  borderHover: '#3d4f7c',
-  textPrimary: '#ffffff',
-  textSecondary: '#94a3b8',
-  textMuted: '#64748b',
-  accent: '#0a66c2',
-  accentHover: '#0077b5',
+  bgMain: '#FFFFFF',
+  bgCard: '#F9F9F9',
+  bgInput: '#FFFFFF',
+  border: '#E8E8E8',
+  borderHover: '#FF6B35',
+  textPrimary: '#1C1C1C',
+  textSecondary: '#555555',
+  textMuted: '#555555',
+  accent: '#FF6B35',
+  accentHover: '#E8571F',
   error: '#ef4444',
   errorBg: 'rgba(239, 68, 68, 0.1)',
   success: '#22c55e',
   successBg: 'rgba(34, 197, 94, 0.1)',
   google: '#ffffff',
-  googleText: '#1f2937',
-  googleBorder: '#d1d5db',
-  walletBg: '#1f2b47',
-  walletBorder: '#2d3a5c',
+  googleText: '#1C1C1C',
+  googleBorder: '#E8E8E8',
+  walletBg: '#F9F9F9',
+  walletBorder: '#E8E8E8',
 };
 
 export default function SignUpPage() {
@@ -133,8 +133,6 @@ export default function SignUpPage() {
       fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
       position: 'relative'
     }}>
-      {/* Blue gradient glow */}
-      <div className="blue-glow-bg" />
 
       {/* Header */}
       <div style={{
@@ -142,24 +140,14 @@ export default function SignUpPage() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
+        background: '#FFFFFF',
+        borderBottom: '1px solid #E8E8E8',
         position: 'relative',
         zIndex: 1
       }}>
-        <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <div style={{
-            width: '32px',
-            height: '32px',
-            borderRadius: '50%',
-            background: colors.bgCard,
-            border: `1px solid ${colors.border}`,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: colors.accent,
-            fontSize: '16px',
-            fontWeight: 600
-          }}>in</div>
-          <div style={{ color: colors.textPrimary, fontWeight: 500, fontSize: '15px' }}>Linkyboss</div>
+        <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '4px' }}>
+          <span style={{ color: '#1C1C1C', fontWeight: 700, fontSize: '17px', letterSpacing: '-0.3px' }}>linkyboss</span>
+          <span style={{ color: '#FF6B35', fontSize: '10px', lineHeight: 1 }}>&#9679;</span>
         </Link>
       </div>
 
@@ -183,26 +171,26 @@ export default function SignUpPage() {
           maxWidth: '440px',
           width: '100%'
         }}>
-          {/* Branding */}
+          {/* Heading */}
           <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-            <div style={{
-              fontSize: '36px',
-              fontWeight: 600,
-              color: colors.textPrimary,
+            <h1 style={{
+              fontSize: '28px',
+              fontWeight: 700,
+              color: '#1C1C1C',
               margin: '0 0 8px 0',
               letterSpacing: '-0.5px'
             }}>
-              L<span style={{ color: colors.textPrimary }}>inky</span><span style={{ color: colors.accent }}>b</span>oss
-            </div>
-            <h1 style={{
-              fontSize: '20px',
-              fontWeight: 500,
-              color: colors.textSecondary,
-              margin: 0,
-              letterSpacing: '-0.2px'
-            }}>
-              Create your account
+              Let&apos;s find your voice.
             </h1>
+            <p style={{
+              fontSize: '15px',
+              fontWeight: 400,
+              color: '#555555',
+              margin: 0,
+              lineHeight: 1.5
+            }}>
+              Create your account to save your interview progress and get your voice profile.
+            </p>
           </div>
 
           {/* Error message */}
@@ -256,8 +244,8 @@ export default function SignUpPage() {
                   outline: 'none',
                   boxSizing: 'border-box'
                 }}
-                onFocus={(e) => { e.target.style.borderColor = colors.borderHover; }}
-                onBlur={(e) => { e.target.style.borderColor = colors.border; }}
+                onFocus={(e) => { e.target.style.borderColor = '#FF6B35'; }}
+                onBlur={(e) => { e.target.style.borderColor = '#E8E8E8'; }}
               />
             </div>
 
@@ -289,8 +277,8 @@ export default function SignUpPage() {
                   outline: 'none',
                   boxSizing: 'border-box'
                 }}
-                onFocus={(e) => { e.target.style.borderColor = colors.borderHover; }}
-                onBlur={(e) => { e.target.style.borderColor = colors.border; }}
+                onFocus={(e) => { e.target.style.borderColor = '#FF6B35'; }}
+                onBlur={(e) => { e.target.style.borderColor = '#E8E8E8'; }}
               />
             </div>
 
@@ -322,8 +310,8 @@ export default function SignUpPage() {
                   outline: 'none',
                   boxSizing: 'border-box'
                 }}
-                onFocus={(e) => { e.target.style.borderColor = colors.borderHover; }}
-                onBlur={(e) => { e.target.style.borderColor = colors.border; }}
+                onFocus={(e) => { e.target.style.borderColor = '#FF6B35'; }}
+                onBlur={(e) => { e.target.style.borderColor = '#E8E8E8'; }}
               />
             </div>
 
@@ -355,8 +343,8 @@ export default function SignUpPage() {
                   outline: 'none',
                   boxSizing: 'border-box'
                 }}
-                onFocus={(e) => { e.target.style.borderColor = colors.borderHover; }}
-                onBlur={(e) => { e.target.style.borderColor = colors.border; }}
+                onFocus={(e) => { e.target.style.borderColor = '#FF6B35'; }}
+                onBlur={(e) => { e.target.style.borderColor = '#E8E8E8'; }}
               />
             </div>
 
@@ -366,12 +354,12 @@ export default function SignUpPage() {
               disabled={isLoading}
               style={{
                 width: '100%',
-                background: isLoading ? colors.bgInput : colors.accent,
+                background: isLoading ? '#E8E8E8' : colors.accent,
                 border: 'none',
                 padding: '14px',
                 fontSize: '15px',
-                fontWeight: 500,
-                color: isLoading ? colors.textMuted : colors.textPrimary,
+                fontWeight: 600,
+                color: isLoading ? '#555555' : '#FFFFFF',
                 borderRadius: '8px',
                 cursor: isLoading ? 'not-allowed' : 'pointer',
                 transition: 'background 0.2s ease',
@@ -381,10 +369,10 @@ export default function SignUpPage() {
                 gap: '8px'
               }}
               onMouseOver={(e) => {
-                if (!isLoading) e.target.style.background = colors.accentHover;
+                if (!isLoading) e.currentTarget.style.background = colors.accentHover;
               }}
               onMouseOut={(e) => {
-                if (!isLoading) e.target.style.background = colors.accent;
+                if (!isLoading) e.currentTarget.style.background = colors.accent;
               }}
             >
               {isLoading ? (
@@ -444,7 +432,7 @@ export default function SignUpPage() {
               <Link href={callbackUrl !== "/" ? `/signin?callbackUrl=${encodeURIComponent(callbackUrl)}` : "/signin"} style={{
                 color: colors.accent,
                 textDecoration: 'none',
-                fontWeight: 500
+                fontWeight: 600
               }}>
                 Sign in
               </Link>
@@ -454,7 +442,7 @@ export default function SignUpPage() {
 
         {/* Footer */}
         <p style={{
-          color: colors.textMuted,
+          color: '#555555',
           fontSize: '12px',
           marginTop: '24px',
           textAlign: 'center'

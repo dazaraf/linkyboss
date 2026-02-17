@@ -48,17 +48,20 @@ const INTERVIEW_FLOW = [
 
 // Brand color constants
 const colors = {
-  bgMain: '#1C1C1C', // Obsidian Black
-  bgCard: '#2A2A2A', // Slightly lighter black for cards
-  bgInput: '#333333', // Input background
-  border: '#404040', // Border color
-  borderHover: '#555555', // Hover border
-  textPrimary: '#FFFFFF', // White
-  textSecondary: '#E8E8E8', // Fog Gray
-  textMuted: '#A0A0A0', // Muted text
-  accent: '#FF6B35', // Electric Orange
-  accentHover: '#FF5722', // Darker orange on hover
+  bgMain: '#FFFFFF',
+  bgCard: '#F9F9F9',
+  bgInput: '#FFFFFF',
+  border: '#E8E8E8',
+  borderHover: '#CCCCCC',
+  textPrimary: '#1C1C1C',
+  textSecondary: '#555555',
+  textMuted: '#888888',
+  accent: '#FF6B35',
+  accentHover: '#E8571F',
+  accentLight: '#FFF3EE',
   statusOnline: '#22c55e',
+  error: '#ef4444',
+  errorBg: 'rgba(239, 68, 68, 0.08)',
 };
 
 const STORAGE_KEY = 'linkyboss_interview_progress';
@@ -796,18 +799,6 @@ export default function Linkyboss() {
         opacity: 1,
         animation: 'fadeIn 0.3s ease-in'
       }}>
-        {/* Orange gradient glow */}
-        <div style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          height: '400px',
-          background: 'radial-gradient(ellipse at top, rgba(255, 107, 53, 0.12) 0%, transparent 60%)',
-          pointerEvents: 'none',
-          zIndex: 0
-        }} />
-
         {/* Header */}
         <div style={{
           padding: isMobile ? '16px 20px' : '20px 32px',
@@ -815,22 +806,13 @@ export default function Linkyboss() {
           alignItems: 'center',
           justifyContent: 'space-between',
           position: 'relative',
-          zIndex: 1
+          zIndex: 1,
+          borderBottom: `1px solid ${colors.border}`,
+          background: colors.bgMain
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{
-              width: '32px',
-              height: '32px',
-              borderRadius: '50%',
-              background: colors.accent,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: colors.bgMain,
-              fontSize: '16px',
-              fontWeight: 700
-            }}>L</div>
-            <div style={{ color: colors.textPrimary, fontWeight: 600, fontSize: '15px' }}>Linkyboss</div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <div style={{ color: colors.textPrimary, fontWeight: 700, fontSize: '17px', letterSpacing: '-0.3px' }}>linkyboss</div>
+            <span style={{ color: colors.accent, fontSize: '10px', lineHeight: 1 }}>●</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
             {status === 'authenticated' && session?.user ? (
@@ -885,7 +867,7 @@ export default function Linkyboss() {
                   padding: '8px 20px',
                   fontSize: '14px',
                   fontWeight: 600,
-                  color: colors.bgMain,
+                  color: '#FFFFFF',
                   borderRadius: '8px',
                   textDecoration: 'none',
                   transition: 'background 0.2s ease'
@@ -998,44 +980,57 @@ export default function Linkyboss() {
           zIndex: 1
         }}>
           <h1 style={{
-            fontSize: 'clamp(36px, 8vw, 64px)',
-            fontWeight: 700,
+            fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
+            fontWeight: 800,
             color: colors.textPrimary,
-            margin: '0 0 16px 0',
-            letterSpacing: '-1.5px',
-            lineHeight: 1.1
+            margin: '0 0 20px 0',
+            letterSpacing: '-2px',
+            lineHeight: 1.05
           }}>
-            Stop sounding like<br />
-            <span style={{ color: colors.accent }}>everyone else</span>
+            Stop posting<br />
+            <span style={{ color: colors.accent }}>into the void.</span>
           </h1>
 
           <p style={{
-            fontSize: 'clamp(18px, 3vw, 22px)',
+            fontSize: 'clamp(16px, 2.5vw, 20px)',
             color: colors.textSecondary,
-            margin: '0 0 48px 0',
-            maxWidth: '600px',
-            lineHeight: 1.6
+            margin: '0 0 52px 0',
+            maxWidth: '560px',
+            lineHeight: 1.65
           }}>
-            8 questions. 4 minutes. A voice profile that captures how you actually think—so every AI tool you use sounds like you, not a robot.
+            Start with a 4-minute interview to capture your voice. Then generate attention-grabbing posts that sound like you, not ChatGPT.
           </p>
 
           {/* Hook Question Card */}
           <div style={{
-            background: colors.bgCard,
-            border: `2px solid ${colors.border}`,
+            background: colors.bgMain,
+            border: `1px solid ${colors.border}`,
             borderRadius: '16px',
             padding: isSmallMobile ? '20px' : isMobile ? '24px' : '40px',
             maxWidth: '600px',
             width: '100%',
             marginBottom: '24px',
+            boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
             transition: 'border-color 0.3s ease'
           }}>
+            <p style={{
+              fontSize: '12px',
+              fontWeight: 600,
+              color: colors.accent,
+              margin: '0 0 10px 0',
+              textAlign: 'left',
+              textTransform: 'uppercase',
+              letterSpacing: '0.08em'
+            }}>
+              First, one question:
+            </p>
             <h2 style={{
-              fontSize: '20px',
+              fontSize: '18px',
               fontWeight: 600,
               color: colors.textPrimary,
               margin: '0 0 24px 0',
-              textAlign: 'left'
+              textAlign: 'left',
+              lineHeight: 1.45
             }}>
               What's something you believe about your industry that would make most people in it uncomfortable?
             </h2>
@@ -1052,7 +1047,9 @@ export default function Linkyboss() {
                   handleHookSubmit();
                 }
               }}
-              placeholder="Be honest. This is where it gets interesting..."
+              onFocus={(e) => { e.target.style.borderColor = colors.accent; }}
+              onBlur={(e) => { e.target.style.borderColor = colors.border; }}
+              placeholder="The uncomfortable truth is..."
               disabled={isSubmittingHook}
               style={{
                 width: '100%',
@@ -1075,7 +1072,7 @@ export default function Linkyboss() {
 
             {hookError && (
               <div style={{
-                color: colors.accentHover,
+                color: colors.error,
                 fontSize: '14px',
                 marginBottom: '16px',
                 textAlign: 'left'
@@ -1089,12 +1086,12 @@ export default function Linkyboss() {
               disabled={!hookAnswer.trim() || isSubmittingHook}
               style={{
                 width: '100%',
-                background: hookAnswer.trim() && !isSubmittingHook ? colors.accent : colors.bgInput,
+                background: hookAnswer.trim() && !isSubmittingHook ? colors.accent : colors.border,
                 border: 'none',
                 padding: '16px',
                 fontSize: '16px',
                 fontWeight: 600,
-                color: hookAnswer.trim() && !isSubmittingHook ? colors.bgMain : colors.textMuted,
+                color: hookAnswer.trim() && !isSubmittingHook ? '#FFFFFF' : colors.textMuted,
                 borderRadius: '8px',
                 cursor: hookAnswer.trim() && !isSubmittingHook ? 'pointer' : 'not-allowed',
                 transition: 'all 0.2s ease',
@@ -1121,14 +1118,14 @@ export default function Linkyboss() {
                   <div style={{
                     width: '16px',
                     height: '16px',
-                    border: `2px solid ${colors.bgMain}`,
+                    border: `2px solid #FFFFFF`,
                     borderTop: '2px solid transparent',
                     borderRadius: '50%',
                     animation: 'spin 0.6s linear infinite'
                   }} />
                   Processing...
                 </>
-              ) : 'Continue'}
+              ) : 'Find My Voice'}
             </button>
 
             <p style={{
@@ -1161,7 +1158,7 @@ export default function Linkyboss() {
         <style>{globalStyles}</style>
         <div style={{
         minHeight: '100vh',
-        background: 'rgba(0, 0, 0, 0.85)',
+        background: 'rgba(0,0,0,0.4)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -1173,56 +1170,57 @@ export default function Linkyboss() {
         right: 0,
         bottom: 0,
         zIndex: 9999,
-        backdropFilter: 'blur(8px)',
+        backdropFilter: 'blur(4px)',
         animation: 'fadeIn 0.3s ease-in'
       }}>
         <div style={{
-          background: colors.bgCard,
-          border: `2px solid ${colors.accent}`,
+          background: '#FFFFFF',
+          borderLeft: `4px solid ${colors.accent}`,
           borderRadius: '16px',
           padding: isSmallMobile ? '20px' : isMobile ? '24px' : '48px',
           maxWidth: '480px',
           width: '100%',
-          boxShadow: `0 20px 60px rgba(255, 107, 53, 0.2)`,
+          boxShadow: '0 20px 60px rgba(0,0,0,0.15)',
           animation: 'slideUp 0.4s ease-out',
           position: 'relative'
         }}>
           <div style={{
-            width: '56px',
-            height: '56px',
+            width: '48px',
+            height: '48px',
             borderRadius: '50%',
-            background: `${colors.accent}20`,
+            background: colors.accentLight,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            marginBottom: '24px'
+            marginBottom: '20px'
           }}>
-            <span style={{ fontSize: isMobile ? '24px' : '28px', color: colors.accent }}>✓</span>
+            <span style={{ fontSize: isMobile ? '20px' : '24px', color: colors.accent }}>✓</span>
           </div>
 
           <h2 style={{
-            fontSize: isMobile ? '24px' : '28px',
+            fontSize: isMobile ? '22px' : '26px',
             fontWeight: 700,
             color: colors.textPrimary,
-            margin: '0 0 12px 0',
-            letterSpacing: '-0.5px'
+            margin: '0 0 10px 0',
+            letterSpacing: '-0.5px',
+            lineHeight: 1.2
           }}>
-            Save Your Progress
+            You're already more interesting than 90% of LinkedIn.
           </h2>
 
           <p style={{
-            fontSize: '16px',
+            fontSize: '15px',
             color: colors.textSecondary,
-            margin: '0 0 32px 0',
+            margin: '0 0 28px 0',
             lineHeight: 1.6
           }}>
-            Great answer. Let's capture your info so we can save your voice profile and send it to you when you're done.
+            7 more questions to build your complete voice profile. Drop your email to save your progress.
           </p>
 
           <div style={{ marginBottom: '16px' }}>
             <label style={{
               display: 'block',
-              fontSize: '14px',
+              fontSize: '13px',
               fontWeight: 600,
               color: colors.textSecondary,
               marginBottom: '8px',
@@ -1234,13 +1232,15 @@ export default function Linkyboss() {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              onFocus={(e) => { e.target.style.borderColor = colors.accent; }}
+              onBlur={(e) => { e.target.style.borderColor = colors.border; }}
               placeholder="Your name"
               disabled={isSubmittingEmail}
               style={{
                 width: '100%',
                 padding: '14px 16px',
                 fontSize: '15px',
-                background: colors.bgInput,
+                background: '#FFFFFF',
                 border: `1px solid ${colors.border}`,
                 borderRadius: '8px',
                 color: colors.textPrimary,
@@ -1255,7 +1255,7 @@ export default function Linkyboss() {
           <div style={{ marginBottom: '16px' }}>
             <label style={{
               display: 'block',
-              fontSize: '14px',
+              fontSize: '13px',
               fontWeight: 600,
               color: colors.textSecondary,
               marginBottom: '8px',
@@ -1270,6 +1270,8 @@ export default function Linkyboss() {
                 setEmail(e.target.value);
                 setEmailError('');
               }}
+              onFocus={(e) => { e.target.style.borderColor = colors.accent; }}
+              onBlur={(e) => { e.target.style.borderColor = colors.border; }}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
                   e.preventDefault();
@@ -1282,7 +1284,7 @@ export default function Linkyboss() {
                 width: '100%',
                 padding: '14px 16px',
                 fontSize: '15px',
-                background: colors.bgInput,
+                background: '#FFFFFF',
                 border: `1px solid ${colors.border}`,
                 borderRadius: '8px',
                 color: colors.textPrimary,
@@ -1295,7 +1297,7 @@ export default function Linkyboss() {
 
           {emailError && (
             <div style={{
-              color: colors.accentHover,
+              color: colors.error,
               fontSize: '14px',
               marginBottom: '16px',
               textAlign: 'left'
@@ -1309,12 +1311,12 @@ export default function Linkyboss() {
             disabled={!name.trim() || !email.trim() || !isValidEmail(email) || isSubmittingEmail}
             style={{
               width: '100%',
-              background: name.trim() && email.trim() && isValidEmail(email) && !isSubmittingEmail ? colors.accent : colors.bgInput,
+              background: name.trim() && email.trim() && isValidEmail(email) && !isSubmittingEmail ? colors.accent : colors.border,
               border: 'none',
               padding: '16px',
               fontSize: '16px',
               fontWeight: 600,
-              color: name.trim() && email.trim() && isValidEmail(email) && !isSubmittingEmail ? colors.bgMain : colors.textMuted,
+              color: name.trim() && email.trim() && isValidEmail(email) && !isSubmittingEmail ? '#FFFFFF' : colors.textMuted,
               borderRadius: '8px',
               cursor: name.trim() && email.trim() && isValidEmail(email) && !isSubmittingEmail ? 'pointer' : 'not-allowed',
               transition: 'all 0.2s ease',
@@ -1341,14 +1343,14 @@ export default function Linkyboss() {
                 <div style={{
                   width: '16px',
                   height: '16px',
-                  border: `2px solid ${colors.bgMain}`,
+                  border: `2px solid #FFFFFF`,
                   borderTop: '2px solid transparent',
                   borderRadius: '50%',
                   animation: 'spin 0.6s linear infinite'
                 }} />
                 Saving...
               </>
-            ) : 'Continue to Interview'}
+            ) : 'Save & Continue'}
           </button>
 
           <p style={{
@@ -1383,26 +1385,18 @@ export default function Linkyboss() {
         <div style={{
           padding: isMobile ? '16px 20px' : '20px 32px',
           borderBottom: `1px solid ${colors.border}`,
+          background: colors.bgMain,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{
-              width: '32px',
-              height: '32px',
-              borderRadius: '50%',
-              background: colors.accent,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: colors.bgMain,
-              fontSize: '16px',
-              fontWeight: 700
-            }}>L</div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <div style={{ color: colors.textPrimary, fontWeight: 700, fontSize: '17px', letterSpacing: '-0.3px' }}>linkyboss</div>
+              <span style={{ color: colors.accent, fontSize: '10px', lineHeight: 1 }}>●</span>
+            </div>
             <div>
-              <div style={{ color: colors.textPrimary, fontWeight: 600, fontSize: '15px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                Linkyboss
+              <div style={{ color: colors.textSecondary, fontSize: '13px', display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <span style={{
                   width: '6px',
                   height: '6px',
@@ -1410,9 +1404,7 @@ export default function Linkyboss() {
                   background: colors.statusOnline,
                   display: 'inline-block'
                 }} />
-                <span style={{ color: colors.textSecondary, fontSize: '13px', fontWeight: 500 }}>
-                  {isTyping ? 'typing...' : 'online'}
-                </span>
+                {isTyping ? 'typing...' : 'online'}
               </div>
             </div>
           </div>
@@ -1477,7 +1469,7 @@ export default function Linkyboss() {
           aria-label={`Interview progress: question ${getQuestionNumber()} of ${TOTAL_QUESTIONS}`}
           style={{
             height: '3px',
-            background: colors.bgInput,
+            background: '#E8E8E8',
             width: '100%'
           }}
         >
@@ -1667,7 +1659,7 @@ export default function Linkyboss() {
                 padding: '12px 16px',
                 borderRadius: '12px',
                 background: msg.type === 'user' ? colors.accent : colors.bgCard,
-                color: colors.textPrimary,
+                color: msg.type === 'user' ? '#FFFFFF' : colors.textPrimary,
                 fontSize: '15px',
                 lineHeight: 1.5,
                 whiteSpace: 'pre-wrap',
@@ -1800,13 +1792,15 @@ export default function Linkyboss() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
+                onFocus={(e) => { e.target.style.borderColor = colors.accent; }}
+                onBlur={(e) => { e.target.style.borderColor = colors.border; }}
                 placeholder="Type your answer and press Enter"
                 aria-label="Your answer"
                 style={{
                   flex: 1,
                   padding: '14px 16px',
                   fontSize: '15px',
-                  background: colors.bgInput,
+                  background: '#FFFFFF',
                   border: `1px solid ${colors.border}`,
                   borderRadius: '8px',
                   color: colors.textPrimary,
@@ -1816,7 +1810,8 @@ export default function Linkyboss() {
                   maxHeight: '120px',
                   overflow: 'auto',
                   fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
-                  lineHeight: 1.5
+                  lineHeight: 1.5,
+                  transition: 'border-color 0.2s ease'
                 }}
               />
               <button
@@ -1827,7 +1822,7 @@ export default function Linkyboss() {
                   width: '44px',
                   height: '44px',
                   flexShrink: 0,
-                  background: (input.trim() && !isTyping) ? colors.accent : colors.bgInput,
+                  background: (input.trim() && !isTyping) ? colors.accent : colors.border,
                   border: 'none',
                   borderRadius: '8px',
                   cursor: (input.trim() && !isTyping) ? 'pointer' : 'not-allowed',
@@ -1848,7 +1843,7 @@ export default function Linkyboss() {
                 }}
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" fill={(input.trim() && !isTyping) ? colors.textPrimary : colors.textMuted} />
+                  <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" fill={(input.trim() && !isTyping) ? '#FFFFFF' : colors.textMuted} />
                 </svg>
               </button>
             </div>
@@ -1894,20 +1889,9 @@ export default function Linkyboss() {
           position: 'relative',
           zIndex: 1
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{
-              width: '32px',
-              height: '32px',
-              borderRadius: '50%',
-              background: colors.accent,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: colors.bgMain,
-              fontSize: '16px',
-              fontWeight: 700
-            }}>L</div>
-            <div style={{ color: colors.textPrimary, fontWeight: 600, fontSize: '15px' }}>Linkyboss</div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <div style={{ color: colors.textPrimary, fontWeight: 700, fontSize: '17px', letterSpacing: '-0.3px' }}>linkyboss</div>
+            <span style={{ color: colors.accent, fontSize: '10px', lineHeight: 1 }}>●</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
             {status === 'authenticated' && session?.user ? (
@@ -1949,7 +1933,7 @@ export default function Linkyboss() {
                   padding: '8px 20px',
                   fontSize: '14px',
                   fontWeight: 600,
-                  color: colors.bgMain,
+                  color: '#FFFFFF',
                   borderRadius: '8px',
                   textDecoration: 'none',
                   transition: 'background 0.2s ease'
@@ -2025,7 +2009,7 @@ export default function Linkyboss() {
                 padding: '14px 16px',
                 fontSize: '15px',
                 background: colors.bgInput,
-                border: `1px solid ${apiError ? colors.accentHover : colors.border}`,
+                border: `1px solid ${apiError ? colors.error : colors.border}`,
                 borderRadius: '8px',
                 color: colors.textPrimary,
                 outline: 'none',
@@ -2036,7 +2020,7 @@ export default function Linkyboss() {
 
             {apiError && (
               <div style={{
-                color: colors.accentHover,
+                color: colors.error,
                 fontSize: '14px',
                 marginBottom: '16px',
                 textAlign: 'left',
@@ -2053,12 +2037,12 @@ export default function Linkyboss() {
               disabled={!email || !isValidEmail(email) || isSending}
               style={{
                 width: '100%',
-                background: email && isValidEmail(email) && !isSending ? colors.accent : colors.bgInput,
+                background: email && isValidEmail(email) && !isSending ? colors.accent : colors.border,
                 border: 'none',
                 padding: '16px',
                 fontSize: '16px',
                 fontWeight: 600,
-                color: email && isValidEmail(email) && !isSending ? colors.bgMain : colors.textMuted,
+                color: email && isValidEmail(email) && !isSending ? '#FFFFFF' : colors.textMuted,
                 borderRadius: '8px',
                 cursor: email && isValidEmail(email) && !isSending ? 'pointer' : 'not-allowed',
                 marginBottom: '16px',
@@ -2145,20 +2129,9 @@ export default function Linkyboss() {
           position: 'relative',
           zIndex: 1
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{
-              width: '32px',
-              height: '32px',
-              borderRadius: '50%',
-              background: colors.accent,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: colors.bgMain,
-              fontSize: '16px',
-              fontWeight: 700
-            }}>L</div>
-            <div style={{ color: colors.textPrimary, fontWeight: 600, fontSize: '15px' }}>Linkyboss</div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <div style={{ color: colors.textPrimary, fontWeight: 700, fontSize: '17px', letterSpacing: '-0.3px' }}>linkyboss</div>
+            <span style={{ color: colors.accent, fontSize: '10px', lineHeight: 1 }}>●</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
             {status === 'authenticated' && session?.user ? (
@@ -2200,7 +2173,7 @@ export default function Linkyboss() {
                   padding: '8px 20px',
                   fontSize: '14px',
                   fontWeight: 600,
-                  color: colors.bgMain,
+                  color: '#FFFFFF',
                   borderRadius: '8px',
                   textDecoration: 'none',
                   transition: 'background 0.2s ease'
@@ -2363,7 +2336,7 @@ export default function Linkyboss() {
           )}
           {vaultSaveStatus === 'error' && (
             <p style={{
-              color: colors.accentHover,
+              color: colors.error,
               fontSize: '13px',
               marginTop: '12px',
               display: 'flex',

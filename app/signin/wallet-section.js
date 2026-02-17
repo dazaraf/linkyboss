@@ -21,8 +21,8 @@ class WalletErrorBoundary extends Component {
           disabled
           style={{
             width: '100%',
-            background: this.props.colors?.walletBg || '#1f2b47',
-            border: `1px solid ${this.props.colors?.walletBorder || '#2d3a5c'}`,
+            background: this.props.colors?.walletBg || '#F9F9F9',
+            border: `1px solid ${this.props.colors?.walletBorder || '#E8E8E8'}`,
             padding: '12px 16px',
             fontSize: '14px',
             color: '#ef4444',
@@ -96,7 +96,7 @@ function WalletInner({ callbackUrl, onError, colors }) {
           padding: '12px 16px',
           fontSize: '15px',
           fontWeight: 500,
-          color: colors.textMuted,
+          color: '#555555',
           borderRadius: '8px',
           cursor: 'wait',
           display: 'flex',
@@ -175,7 +175,7 @@ function WalletButton({ callbackUrl, onError, colors, wagmi, rk }) {
         padding: '12px 16px',
         fontSize: '15px',
         fontWeight: 500,
-        color: colors.textPrimary,
+        color: '#1C1C1C',
         borderRadius: '8px',
         cursor: isLoading ? 'not-allowed' : 'pointer',
         display: 'flex',

@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-bg: #FFFFFF;
+  --color-surface: #F9F9F9;
+  --color-border: #E8E8E8;
+  --color-text: #1C1C1C;
+  --color-text-secondary: #555555;
+  --color-text-muted: #888888;
+  --color-accent: #FF6B35;
+  --color-accent-hover: #E8571F;
+  --color-accent-light: #FFF3EE;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -9,11 +21,11 @@
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #FFFFFF;
+  color: #1C1C1C;
+  font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #1C1C1C;
-  color: #FFFFFF;
 }
 
 /* Smooth transitions */
@@ -26,6 +38,32 @@ input:focus, textarea:focus {
   outline: none;
   border-color: #FF6B35 !important;
   box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.15) !important;
+}
+
+/* Focus visible outline */
+:focus-visible {
+  outline: 2px solid #FF6B35;
+  outline-offset: 2px;
+}
+
+/* Scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #FF6B35 #F9F9F9;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #F9F9F9;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #FF6B35;
+  border-radius: 3px;
 }
 
 /* Animations */
@@ -66,6 +104,27 @@ input:focus, textarea:focus {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-4px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(4px);
   }
 }
 

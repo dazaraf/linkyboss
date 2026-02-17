@@ -10,23 +10,23 @@ import dynamic from "next/dynamic";
 const WalletSection = dynamic(() => import("./wallet-section"), { ssr: false });
 
 const colors = {
-  bgMain: '#1a1a2e',
-  bgCard: '#16213e',
-  bgInput: '#1f2b47',
-  border: '#2d3a5c',
-  borderHover: '#3d4f7c',
-  textPrimary: '#ffffff',
-  textSecondary: '#94a3b8',
-  textMuted: '#64748b',
-  accent: '#0a66c2',
-  accentHover: '#0077b5',
+  bgMain: '#FFFFFF',
+  bgCard: '#F9F9F9',
+  bgInput: '#FFFFFF',
+  border: '#E8E8E8',
+  borderHover: '#FF6B35',
+  textPrimary: '#1C1C1C',
+  textSecondary: '#555555',
+  textMuted: '#555555',
+  accent: '#FF6B35',
+  accentHover: '#E8571F',
   error: '#ef4444',
   errorBg: 'rgba(239, 68, 68, 0.1)',
   google: '#ffffff',
-  googleText: '#1f2937',
-  googleBorder: '#d1d5db',
-  walletBg: '#1f2b47',
-  walletBorder: '#2d3a5c',
+  googleText: '#1C1C1C',
+  googleBorder: '#E8E8E8',
+  walletBg: '#F9F9F9',
+  walletBorder: '#E8E8E8',
 };
 
 export default function SignInPage() {
@@ -91,18 +91,20 @@ export default function SignInPage() {
       fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
       position: 'relative'
     }}>
-      <div className="blue-glow-bg" />
 
       {/* Header */}
-      <div style={{ padding: '20px 32px', display: 'flex', alignItems: 'center', position: 'relative', zIndex: 1 }}>
-        <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <div style={{
-            width: '32px', height: '32px', borderRadius: '50%',
-            background: colors.bgCard, border: `1px solid ${colors.border}`,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            color: colors.accent, fontSize: '16px', fontWeight: 600
-          }}>in</div>
-          <div style={{ color: colors.textPrimary, fontWeight: 500, fontSize: '15px' }}>Linkyboss</div>
+      <div style={{
+        padding: '20px 32px',
+        display: 'flex',
+        alignItems: 'center',
+        background: '#FFFFFF',
+        borderBottom: '1px solid #E8E8E8',
+        position: 'relative',
+        zIndex: 1
+      }}>
+        <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '4px' }}>
+          <span style={{ color: '#1C1C1C', fontWeight: 700, fontSize: '17px', letterSpacing: '-0.3px' }}>linkyboss</span>
+          <span style={{ color: '#FF6B35', fontSize: '10px', lineHeight: 1 }}>&#9679;</span>
         </Link>
       </div>
 
@@ -116,14 +118,14 @@ export default function SignInPage() {
           background: colors.bgCard, border: `1px solid ${colors.border}`,
           borderRadius: '16px', padding: '40px', maxWidth: '440px', width: '100%'
         }}>
-          {/* Branding */}
+          {/* Heading */}
           <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-            <div style={{ fontSize: '36px', fontWeight: 600, color: colors.textPrimary, marginBottom: '8px', letterSpacing: '-0.5px' }}>
-              Linky<span style={{ color: colors.accent }}>b</span>oss
-            </div>
-            <h1 style={{ fontSize: '20px', fontWeight: 500, color: colors.textSecondary, margin: 0 }}>
-              Sign in to your account
+            <h1 style={{ fontSize: '28px', fontWeight: 700, color: '#1C1C1C', marginBottom: '8px', letterSpacing: '-0.5px', margin: '0 0 8px 0' }}>
+              Welcome back.
             </h1>
+            <p style={{ fontSize: '16px', fontWeight: 400, color: '#555555', margin: 0 }}>
+              Your voice profile is waiting.
+            </p>
           </div>
 
           {/* Error */}
@@ -150,6 +152,8 @@ export default function SignInPage() {
                 type="email" value={email}
                 onChange={(e) => { setEmail(e.target.value); setError(''); }}
                 placeholder="you@company.com" autoComplete="email"
+                onFocus={(e) => { e.target.style.borderColor = '#FF6B35'; }}
+                onBlur={(e) => { e.target.style.borderColor = '#E8E8E8'; }}
                 style={{
                   width: '100%', padding: '12px 16px', fontSize: '15px',
                   background: colors.bgInput, border: `1px solid ${colors.border}`,
@@ -163,6 +167,8 @@ export default function SignInPage() {
                 type="password" value={password}
                 onChange={(e) => { setPassword(e.target.value); setError(''); }}
                 placeholder="Enter your password" autoComplete="current-password"
+                onFocus={(e) => { e.target.style.borderColor = '#FF6B35'; }}
+                onBlur={(e) => { e.target.style.borderColor = '#E8E8E8'; }}
                 style={{
                   width: '100%', padding: '12px 16px', fontSize: '15px',
                   background: colors.bgInput, border: `1px solid ${colors.border}`,
@@ -174,9 +180,9 @@ export default function SignInPage() {
               <Link href="#" style={{ color: colors.textMuted, fontSize: '13px', textDecoration: 'none' }}>Forgot password?</Link>
             </div>
             <button type="submit" disabled={isLoading} style={{
-              width: '100%', background: isLoading ? colors.bgInput : colors.accent,
-              border: 'none', padding: '14px', fontSize: '15px', fontWeight: 500,
-              color: isLoading ? colors.textMuted : colors.textPrimary,
+              width: '100%', background: isLoading ? '#E8E8E8' : colors.accent,
+              border: 'none', padding: '14px', fontSize: '15px', fontWeight: 600,
+              color: isLoading ? '#555555' : '#FFFFFF',
               borderRadius: '8px', cursor: isLoading ? 'not-allowed' : 'pointer',
               transition: 'background 0.2s ease'
             }}>
@@ -220,7 +226,7 @@ export default function SignInPage() {
           <div style={{ textAlign: 'center', marginTop: '28px', paddingTop: '24px', borderTop: `1px solid ${colors.border}` }}>
             <span style={{ color: colors.textMuted, fontSize: '14px' }}>
               Don&apos;t have an account?{' '}
-              <Link href={callbackUrl !== "/" ? `/signup?callbackUrl=${encodeURIComponent(callbackUrl)}` : "/signup"} style={{ color: colors.accent, textDecoration: 'none', fontWeight: 500 }}>
+              <Link href={callbackUrl !== "/" ? `/signup?callbackUrl=${encodeURIComponent(callbackUrl)}` : "/signup"} style={{ color: colors.accent, textDecoration: 'none', fontWeight: 600 }}>
                 Sign up
               </Link>
             </span>

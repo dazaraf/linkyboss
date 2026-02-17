@@ -6,19 +6,21 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 const colors = {
-  bgMain: '#1a1a2e',
-  bgCard: '#16213e',
-  bgInput: '#1f2b47',
-  border: '#2d3a5c',
-  borderHover: '#3d4f7c',
-  textPrimary: '#ffffff',
-  textSecondary: '#94a3b8',
-  textMuted: '#64748b',
-  accent: '#0a66c2',
-  accentHover: '#0077b5',
+  bgMain: '#FFFFFF',
+  bgCard: '#F9F9F9',
+  bgInput: '#F0F0F0',
+  border: '#E8E8E8',
+  borderHover: '#CCCCCC',
+  textPrimary: '#1C1C1C',
+  textSecondary: '#555555',
+  textMuted: '#888888',
+  accent: '#FF6B35',
+  accentHover: '#E8571F',
+  accentLight: '#FFF3EE',
+  accentBorder: '#FFD4C2',
   statusOnline: '#22c55e',
   error: '#ef4444',
-  errorBg: 'rgba(239, 68, 68, 0.1)',
+  errorBg: 'rgba(239, 68, 68, 0.08)',
 };
 
 function formatDate(dateStr) {
@@ -165,7 +167,6 @@ export default function DashboardPage() {
         justifyContent: 'center',
         position: 'relative',
       }}>
-        <div className="blue-glow-bg" />
         <div style={{
           display: 'flex',
           flexDirection: 'column',
@@ -200,12 +201,11 @@ export default function DashboardPage() {
         fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
         position: 'relative',
       }}>
-        <div className="blue-glow-bg" />
-
         {/* Header */}
         <div style={{
           padding: '20px 32px',
           borderBottom: `1px solid ${colors.border}`,
+          background: '#FFFFFF',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -213,14 +213,16 @@ export default function DashboardPage() {
           zIndex: 1,
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <div style={{
-                width: '32px', height: '32px', borderRadius: '50%',
-                background: colors.bgCard, border: `1px solid ${colors.border}`,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                color: colors.accent, fontSize: '16px', fontWeight: 600,
-              }}>in</div>
-              <div style={{ color: colors.textPrimary, fontWeight: 500, fontSize: '15px' }}>Linkyboss</div>
+            <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span style={{
+                color: colors.textPrimary,
+                fontWeight: 700,
+                fontSize: '18px',
+                letterSpacing: '-0.5px',
+              }}>
+                linkyboss
+              </span>
+              <span style={{ color: colors.accent, fontSize: '10px', lineHeight: 1 }}>●</span>
             </Link>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -233,7 +235,7 @@ export default function DashboardPage() {
                 padding: '8px 20px',
                 fontSize: '14px',
                 fontWeight: 500,
-                color: copySuccess ? colors.statusOnline : colors.textPrimary,
+                color: copySuccess ? colors.statusOnline : '#FFFFFF',
                 borderRadius: '8px',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease',
@@ -270,7 +272,7 @@ export default function DashboardPage() {
         }}>
           <h1 style={{
             fontSize: '28px',
-            fontWeight: 600,
+            fontWeight: 700,
             color: colors.textPrimary,
             margin: '0 0 8px 0',
             letterSpacing: '-0.5px',
@@ -286,6 +288,7 @@ export default function DashboardPage() {
             border: `1px solid ${colors.border}`,
             borderRadius: '12px',
             padding: '24px',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
           }}>
             <pre style={{
               color: colors.textSecondary,
@@ -308,12 +311,11 @@ export default function DashboardPage() {
       fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
       position: 'relative',
     }}>
-      <div className="blue-glow-bg" />
-
       {/* Header */}
       <div style={{
         padding: '20px 32px',
         borderBottom: `1px solid ${colors.border}`,
+        background: '#FFFFFF',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -321,14 +323,16 @@ export default function DashboardPage() {
         zIndex: 1,
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
-          <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{
-              width: '32px', height: '32px', borderRadius: '50%',
-              background: colors.bgCard, border: `1px solid ${colors.border}`,
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              color: colors.accent, fontSize: '16px', fontWeight: 600,
-            }}>in</div>
-            <div style={{ color: colors.textPrimary, fontWeight: 500, fontSize: '15px' }}>Linkyboss</div>
+          <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{
+              color: colors.textPrimary,
+              fontWeight: 700,
+              fontSize: '18px',
+              letterSpacing: '-0.5px',
+            }}>
+              linkyboss
+            </span>
+            <span style={{ color: colors.accent, fontSize: '10px', lineHeight: 1 }}>●</span>
           </Link>
 
           {/* Nav links */}
@@ -339,14 +343,15 @@ export default function DashboardPage() {
               fontSize: '14px',
               fontWeight: 500,
               color: colors.textPrimary,
-              background: colors.bgInput,
+              background: colors.bgCard,
+              border: `1px solid ${colors.border}`,
             }}>Dashboard</span>
             <Link href="/studio" style={{
               padding: '6px 14px',
               borderRadius: '6px',
               fontSize: '14px',
               fontWeight: 500,
-              color: colors.textMuted,
+              color: colors.textSecondary,
               textDecoration: 'none',
             }}>Content Studio</Link>
             <Link href="/" style={{
@@ -354,7 +359,7 @@ export default function DashboardPage() {
               borderRadius: '6px',
               fontSize: '14px',
               fontWeight: 500,
-              color: colors.textMuted,
+              color: colors.textSecondary,
               textDecoration: 'none',
             }}>Interview</Link>
           </nav>
@@ -408,14 +413,14 @@ export default function DashboardPage() {
           <div>
             <h1 style={{
               fontSize: '28px',
-              fontWeight: 600,
+              fontWeight: 700,
               color: colors.textPrimary,
               margin: '0 0 4px 0',
               letterSpacing: '-0.5px',
             }}>
-              Voice Profile Vault
+              Your Voice Profiles
             </h1>
-            <p style={{ color: colors.textMuted, fontSize: '14px', margin: 0 }}>
+            <p style={{ color: colors.textSecondary, fontSize: '14px', margin: 0 }}>
               Your saved voice profiles from interviews
             </p>
           </div>
@@ -425,11 +430,14 @@ export default function DashboardPage() {
             padding: '10px 20px',
             fontSize: '14px',
             fontWeight: 500,
-            color: colors.textPrimary,
+            color: '#FFFFFF',
             borderRadius: '8px',
             textDecoration: 'none',
             transition: 'background 0.2s ease',
-          }}>
+          }}
+            onMouseOver={(e) => { e.currentTarget.style.background = colors.accentHover; }}
+            onMouseOut={(e) => { e.currentTarget.style.background = colors.accent; }}
+          >
             New Interview
           </Link>
         </div>
@@ -478,28 +486,29 @@ export default function DashboardPage() {
             background: colors.bgCard,
             border: `1px solid ${colors.border}`,
             borderRadius: '16px',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
           }}>
             <div style={{
               width: '64px', height: '64px', borderRadius: '50%',
-              background: `${colors.accent}20`,
+              background: colors.accentLight,
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               margin: '0 auto 24px auto',
               fontSize: '28px', color: colors.accent,
             }}>
-              in
+              ●
             </div>
             <h2 style={{
               fontSize: '22px', fontWeight: 600,
-              color: colors.textPrimary, margin: '0 0 8px 0',
+              color: colors.textSecondary, margin: '0 0 8px 0',
             }}>
-              No voice profiles yet
+              No voice profiles yet.
             </h2>
             <p style={{
               color: colors.textSecondary, fontSize: '15px',
               margin: '0 0 28px 0', maxWidth: '400px',
               marginLeft: 'auto', marginRight: 'auto', lineHeight: 1.5,
             }}>
-              Complete the Linkyboss interview to create your first voice profile. It takes about 4 minutes.
+              Complete the interview to find your voice.
             </p>
             <Link href="/" style={{
               display: 'inline-block',
@@ -507,12 +516,12 @@ export default function DashboardPage() {
               padding: '14px 32px',
               fontSize: '15px',
               fontWeight: 500,
-              color: colors.textPrimary,
+              color: '#FFFFFF',
               borderRadius: '8px',
               textDecoration: 'none',
               transition: 'background 0.2s ease',
             }}>
-              Start Interview
+              Start the Interview
             </Link>
           </div>
         )}
@@ -530,16 +539,21 @@ export default function DashboardPage() {
                 <div
                   key={profile.id}
                   style={{
-                    background: colors.bgCard,
+                    background: '#FFFFFF',
                     border: `1px solid ${colors.border}`,
                     borderRadius: '12px',
                     padding: '24px',
-                    transition: 'border-color 0.2s ease',
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+                    transition: 'box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease',
                   }}
                   onMouseOver={(e) => {
+                    e.currentTarget.style.boxShadow = '0 6px 20px rgba(0,0,0,0.10)';
+                    e.currentTarget.style.transform = 'translateY(-2px)';
                     e.currentTarget.style.borderColor = colors.borderHover;
                   }}
                   onMouseOut={(e) => {
+                    e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06)';
+                    e.currentTarget.style.transform = 'translateY(0)';
                     e.currentTarget.style.borderColor = colors.border;
                   }}
                 >
@@ -576,7 +590,7 @@ export default function DashboardPage() {
                     )}
                   </div>
 
-                  {/* Content pillars as pill badges */}
+                  {/* Content pillars as orange pill tags */}
                   {pillars.length > 0 && (
                     <div style={{
                       display: 'flex',
@@ -591,7 +605,8 @@ export default function DashboardPage() {
                             fontSize: '12px',
                             fontWeight: 500,
                             color: colors.accent,
-                            background: `${colors.accent}15`,
+                            background: colors.accentLight,
+                            border: `1px solid ${colors.accentBorder}`,
                             padding: '4px 10px',
                             borderRadius: '12px',
                             whiteSpace: 'nowrap',
@@ -618,18 +633,24 @@ export default function DashboardPage() {
                       aria-label={`View profile: ${profile.name}`}
                       style={{
                         flex: 1,
-                        background: colors.accent,
-                        border: 'none',
+                        background: 'transparent',
+                        border: `1px solid ${colors.border}`,
                         padding: '10px 16px',
                         fontSize: '13px',
                         fontWeight: 500,
-                        color: colors.textPrimary,
+                        color: colors.textSecondary,
                         borderRadius: '6px',
                         cursor: 'pointer',
-                        transition: 'background 0.2s ease',
+                        transition: 'all 0.2s ease',
                       }}
-                      onMouseOver={(e) => { e.target.style.background = colors.accentHover; }}
-                      onMouseOut={(e) => { e.target.style.background = colors.accent; }}
+                      onMouseOver={(e) => {
+                        e.target.style.borderColor = colors.borderHover;
+                        e.target.style.color = colors.textPrimary;
+                      }}
+                      onMouseOut={(e) => {
+                        e.target.style.borderColor = colors.border;
+                        e.target.style.color = colors.textSecondary;
+                      }}
                     >
                       View
                     </button>
@@ -638,20 +659,22 @@ export default function DashboardPage() {
                       aria-label={`Open Studio with profile: ${profile.name}`}
                       style={{
                         flex: 1,
-                        background: 'transparent',
-                        border: `1px solid ${colors.accent}`,
+                        background: colors.accent,
+                        border: 'none',
                         padding: '10px 16px',
                         fontSize: '13px',
                         fontWeight: 500,
-                        color: colors.accent,
+                        color: '#FFFFFF',
                         borderRadius: '6px',
                         cursor: 'pointer',
                         textDecoration: 'none',
                         textAlign: 'center',
-                        transition: 'all 0.2s ease',
+                        transition: 'background 0.2s ease',
                       }}
+                      onMouseOver={(e) => { e.currentTarget.style.background = colors.accentHover; }}
+                      onMouseOut={(e) => { e.currentTarget.style.background = colors.accent; }}
                     >
-                      Open Studio
+                      Go to Studio
                     </Link>
                     <button
                       onClick={() => handleDelete(profile.id)}
@@ -663,7 +686,7 @@ export default function DashboardPage() {
                         padding: '10px 16px',
                         fontSize: '13px',
                         fontWeight: 500,
-                        color: deletingId === profile.id ? colors.textMuted : colors.textSecondary,
+                        color: deletingId === profile.id ? colors.textMuted : colors.textMuted,
                         borderRadius: '6px',
                         cursor: deletingId === profile.id ? 'not-allowed' : 'pointer',
                         transition: 'all 0.2s ease',
@@ -677,7 +700,7 @@ export default function DashboardPage() {
                       onMouseOut={(e) => {
                         if (deletingId !== profile.id) {
                           e.target.style.borderColor = colors.border;
-                          e.target.style.color = colors.textSecondary;
+                          e.target.style.color = colors.textMuted;
                         }
                       }}
                     >
