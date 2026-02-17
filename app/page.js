@@ -987,8 +987,8 @@ export default function Linkyboss() {
             letterSpacing: '-2px',
             lineHeight: 1.05
           }}>
-            Stop posting<br />
-            <span style={{ color: colors.accent }}>into the void.</span>
+            Your shortcut to thought leadership<br />
+            <span style={{ color: colors.accent }}>that actually sells.</span>
           </h1>
 
           <p style={{
