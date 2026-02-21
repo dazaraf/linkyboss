@@ -1,0 +1,318 @@
+{
+  "hookFormulas": [
+    {
+      "name": "The Bold Statement",
+      "description": "Start with a strong opinion that makes people react. No hedging. No setup. Drop the take directly.",
+      "examples": [
+        "Most crypto marketing is useless.",
+        "Your tokenomics don't matter if no one knows you exist.",
+        "Web3 founders are terrible at LinkedIn. Here's proof."
+      ]
+    },
+    {
+      "name": "The Curiosity Gap",
+      "description": "Hint at something interesting or counterintuitive without revealing the answer. Forces the reader to click 'see more' to close the loop.",
+      "examples": [
+        "Bitcoin didn't crash because of Japan. Here's what actually happened.",
+        "I've reviewed 100+ crypto pitch decks. They all make the same mistake."
+      ]
+    },
+    {
+      "name": "The Personal Story Opener",
+      "description": "Drop the reader into a specific moment in time. Use precise details — a date, a number, a place. No preamble.",
+      "examples": [
+        "In 2018, I almost quit crypto.",
+        "Last Tuesday, I mass-applied to 42 crypto companies."
+      ]
+    },
+    {
+      "name": "The Contrarian Take",
+      "description": "Challenge a widely held belief in the first line. State the opposing view directly. No softening.",
+      "examples": [
+        "Stop hiring marketing agencies. Do this instead.",
+        "Community doesn't matter. Distribution does."
+      ]
+    },
+    {
+      "name": "The Specific Number",
+      "description": "Lead with a precise number. Specific beats round. Numbers interrupt pattern recognition and signal credibility.",
+      "examples": [
+        "I spent $47,000 to learn this one lesson about crypto marketing.",
+        "BTC nuked 5% in 1 hour, wiping out $500M in longs."
+      ]
+    },
+    {
+      "name": "The Pattern Recognition",
+      "description": "Signal that you have done the work — analyzed data, observed trends, put in the reps. Shows earned authority.",
+      "examples": [
+        "I analyzed 50 viral crypto posts. They all do this one thing.",
+        "After 8 years in crypto, I've noticed something about the founders who make it."
+      ]
+    }
+  ],
+
+  "hookRules": [
+    "Max 2 lines. Shorter is better.",
+    "One idea only. Do not cram multiple concepts into the hook.",
+    "No generic intros. Phrases like 'Excited to share...' are disqualifying.",
+    "No questions as hooks. Declarative statements outperform questions.",
+    "Create an open loop. The reader must click 'see more' to resolve the tension."
+  ],
+
+  "postTypeGuidance": {
+    "hits": [
+      {
+        "type": "Market Macro & Analysis",
+        "description": "Timely takes on market movements, macro trends, or on-chain data with the author's interpretation layered on top."
+      },
+      {
+        "type": "Founder Lessons & Scars",
+        "description": "Hard-won lessons from personal experience — specific, costly, and real. Not advice, but testimony."
+      },
+      {
+        "type": "Contrarian Takes",
+        "description": "Challenging conventional wisdom with a clear opposing view, backed by the author's own experience or data."
+      },
+      {
+        "type": "Crypto vs Web2",
+        "description": "Comparisons that illuminate what crypto does differently — or worse — than traditional tech or finance."
+      },
+      {
+        "type": "Clear Explanations",
+        "description": "Making a complex concept simple. The author earns authority by explaining without jargon."
+      },
+      {
+        "type": "Personal Stories",
+        "description": "Narrative posts with a specific situation, a moment of tension, and a lesson. STIL structure applies."
+      }
+    ],
+    "misses": [
+      {
+        "type": "Announcements",
+        "description": "Posts that lead with company news.",
+        "whyItFails": "Readers don't care about your milestone. They care about what it means for them. Announcements are self-serving by default and generate no organic engagement."
+      },
+      {
+        "type": "Pure Self-Promotion",
+        "description": "Posts centered on selling a product, service, or accolade.",
+        "whyItFails": "LinkedIn is a trust-building medium, not a billboard. Overt promotion breaks the social contract and suppresses algorithmic reach."
+      },
+      {
+        "type": "Vague Inspiration",
+        "description": "Generic motivational content with no specificity.",
+        "whyItFails": "Vague = invisible. Without specificity there is no credibility. Inspiration without grounding reads as hollow and forgettable."
+      },
+      {
+        "type": "Generic Advice",
+        "description": "Tips and frameworks that could apply to anyone.",
+        "whyItFails": "If it could have been written by anyone, it was. Generic advice signals the author has no unique perspective, which destroys authority."
+      },
+      {
+        "type": "Engagement Bait",
+        "description": "Posts designed to harvest reactions rather than provide value.",
+        "whyItFails": "LinkedIn's algorithm has deprioritized explicit engagement bait. It also trains the wrong audience and attracts low-quality followers."
+      },
+      {
+        "type": "Reshares Without Context",
+        "description": "Sharing another post or link with minimal or no original commentary.",
+        "whyItFails": "Provides no reason to follow the author. Adds no value to the original content. Does not build authority or trust."
+      }
+    ]
+  },
+
+  "stilFramework": {
+    "phases": [
+      {
+        "name": "Situation",
+        "description": "Set the scene. Establish when, where, and what was happening. Be specific — use dates, numbers, or named contexts to anchor the reader in a real moment."
+      },
+      {
+        "name": "Tension",
+        "description": "Introduce the problem, conflict, or obstacle. This is the engine of the story. Without tension there is no reason to keep reading."
+      },
+      {
+        "name": "Insight",
+        "description": "The turning point — what the author realized, discovered, or understood as a result of the tension. This must be earned, not stated."
+      },
+      {
+        "name": "Lesson",
+        "description": "The explicit takeaway for the reader. Make it transferable. The reader should be able to apply it without having lived the same story."
+      }
+    ],
+    "rules": [
+      "Each phase must be present. Skipping Tension produces flat, boring content.",
+      "The Situation should be no more than 2-3 lines. Do not over-set the scene.",
+      "The Insight must feel earned by the Tension — not dropped in from outside the narrative.",
+      "The Lesson is for the reader. It should not loop back to promoting the author.",
+      "Do not label the phases explicitly in the post. They are structural guides, not section headers."
+    ]
+  },
+
+  "writingStyleRules": [
+    "Short paragraphs. 1-2 lines maximum. White space is a readability tool on mobile.",
+    "Simple language. Write like you talk to a smart friend, not like a press release.",
+    "First person only. Use 'I', not 'We'. 'We' dilutes accountability and sounds corporate.",
+    "Slightly opinionated. Bland content is invisible content. Take a position.",
+    "Calm confidence, not hype. Quiet certainty outperforms excitement or arrogance.",
+    "Mental model: you are sending a DM to one smart founder you respect.",
+    "Active voice only. Kill passive constructions.",
+    "Vary sentence length. Mix punchy 3-word fragments with longer explanatory sentences.",
+    "Be specific. Replace every generic claim with a specific example, number, or moment.",
+    "No hashtags unless explicitly requested.",
+    "No emojis unless explicitly requested.",
+    "No 'follow me' or engagement-bait CTAs.",
+    "End with substance. The last line should land like a punchline or a truth bomb.",
+    "No markdown formatting in the post. No headers, bold, or bullet dashes.",
+    "Double newline between paragraphs for LinkedIn readability."
+  ],
+
+  "bangerChecklist": [
+    {
+      "check": "Would I stop scrolling for this?",
+      "scoringCriteria": "Evaluate the first 2 lines against all 6 hook formula patterns. If none match, flag as weak hook. Hook must create tension, curiosity, or a bold claim without generic openers."
+    },
+    {
+      "check": "Is it specific? (Vague = invisible. Details = credibility.)",
+      "scoringCriteria": "Scan for the presence of at least one concrete data point: a number, a date, a named entity, a dollar figure, or a measurable outcome. Absence of any specifics is a negative signal."
+    },
+    {
+      "check": "Is it honest?",
+      "scoringCriteria": "Check that the content references the founder's actual profile data (identity, lesson, content_bank, contrarian belief). Content that matches profile signals scores higher. Content with no profile signal overlap scores lower."
+    },
+    {
+      "check": "Does this help one founder?",
+      "scoringCriteria": "Check that the post contains a transferable lesson or actionable takeaway. Posts that are purely self-referential (announcements, accolades) with no reader benefit are penalized."
+    },
+    {
+      "check": "Is the formatting clean? (Short paragraphs. White space. Easy to scan.)",
+      "scoringCriteria": "Count paragraph breaks (double newlines). Require at least 3 paragraph breaks for posts over 500 characters. Flag any paragraph exceeding 3 lines. Check average words per line."
+    },
+    {
+      "check": "Did I end with a question?",
+      "scoringCriteria": "Check the final 150 characters for a question mark. Penalize generic question endings ('What do you think?', 'Agree?', 'Thoughts?'). Reward specific, debate-worthy questions."
+    },
+    {
+      "check": "Is the hook strong? (First 2 lines decide everything.)",
+      "scoringCriteria": "Extract the first 2 lines (split on first double newline or first 160 characters). Check against generic opener list. Check for presence of a hook formula pattern. Flag if hook exceeds 2 lines."
+    },
+    {
+      "check": "Does the image add value?",
+      "scoringCriteria": "This check applies at the UI layer, not content scoring. Flag posts in image-optional types (story, insight) if no image metadata is attached. Cannot be evaluated from text alone."
+    }
+  ],
+
+  "engagementRules": [
+    "End every post with a real, specific question — not 'What do you think?' but something debatable and contextual.",
+    "Good closing question examples: 'Curious how others see this.' / 'Am I missing something?' / 'Founders — what's worked for you?'",
+    "Reply to every comment. The algorithm rewards active threads.",
+    "The first hour of comments matters most to algorithmic distribution. Plan to be available to respond post-publish.",
+    "Dwell time is a ranking signal. Longer posts that get read fully beat short posts that get skipped.",
+    "Author replies to comments increase thread depth, which boosts reach.",
+    "Post about the same topics consistently to build niche authority and signal relevance to the algorithm."
+  ],
+
+  "scoringCriteria": [
+    {
+      "name": "Banned Phrase Detection",
+      "check": "Scan the full post text (case-insensitive) for presence of any phrase in the BANNED_PHRASES list.",
+      "scoreImpact": "-3 per occurrence",
+      "implementation": "Iterate BANNED_PHRASES array. For each phrase, use lowerContent.includes(phrase.toLowerCase()). Increment bannedCount. Apply score -= 3 per match. Flag: '{n} AI-slop phrase(s) detected'."
+    },
+    {
+      "name": "Passive Voice Ratio",
+      "check": "Split content into sentences on [.!?]+. Apply regex /\\b(is|are|was|were|be|been|being)\\s+(being\\s+)?\\w+ed\\b/i to each sentence. If passiveCount / totalSentences > 0.30, penalize.",
+      "scoreImpact": "-5",
+      "implementation": "sentences = content.split(/[.!?]+/).filter(s => s.trim().length > 0). passivePattern = /\\b(is|are|was|were|be|been|being)\\s+(being\\s+)?\\w+ed\\b/i. Ratio check: passiveCount / sentences.length > 0.3. Flag: 'Too much passive voice'."
+    },
+    {
+      "name": "Average Sentence Length",
+      "check": "Calculate total word count divided by sentence count. If average exceeds 20 words per sentence, penalize. Long sentences indicate corporate or AI writing patterns.",
+      "scoreImpact": "-5",
+      "implementation": "words = content.split(/\\s+/).filter(w => w.length > 0). avgSentenceLength = words.length / sentences.length. Condition: avgSentenceLength > 20. Flag: 'Sentences too long on average'."
+    },
+    {
+      "name": "Generic Opener Detection",
+      "check": "Extract the first line of the post (split on first newline). Check if it starts with any phrase in the generic openers list: ['in today's', 'in the world of', 'as a society', 'when it comes to', 'there's no denying', 'we all know that', 'it\\'s no secret that', 'in an era of', 'in this day and age', 'as we navigate']. Heavy penalty because the hook is the highest-leverage element.",
+      "scoreImpact": "-10",
+      "implementation": "firstLine = content.split('\\n')[0].toLowerCase(). Iterate genericOpeners array. if (firstLine.startsWith(opener)) apply score -= 10, break after first match. Flag: 'Generic opener detected'."
+    },
+    {
+      "name": "Hashtag Overload",
+      "check": "Count occurrences of /#\\w+/g in post content. If count exceeds 3, penalize. LinkedIn posts with excessive hashtags signal low-quality content and suppress organic reach.",
+      "scoreImpact": "-5",
+      "implementation": "hashtagCount = (content.match(/#\\w+/g) || []).length. Condition: hashtagCount > 3. Flag: 'Too many hashtags'."
+    },
+    {
+      "name": "Emoji Overload",
+      "check": "Count Unicode emoji characters using pattern /[\\u{1F600}-\\u{1F64F}\\u{1F300}-\\u{1F5FF}\\u{1F680}-\\u{1F6FF}\\u{1F1E0}-\\u{1F1FF}\\u{2600}-\\u{26FF}\\u{2700}-\\u{27BF}]/gu. If count exceeds 5, penalize.",
+      "scoreImpact": "-5",
+      "implementation": "emojiPattern = /[\\u{1F600}-\\u{1F64F}...]/gu. emojiCount = (content.match(emojiPattern) || []).length. Condition: emojiCount > 5. Flag: 'Too many emojis'."
+    },
+    {
+      "name": "Founder Content Grounding",
+      "check": "Extract significant words (length > 4) from each profile field (identity, origin, lesson, content_bank, win, hottake, contrarian, repeating, audience). For each field, check what percentage of those words appear in the post content. If any field achieves > 30% word overlap, the post is grounded in real founder data.",
+      "scoreImpact": "+5",
+      "implementation": "For each signal in profileData fields, split into signalWords filtering length > 4. Count how many appear in lowerContent. If matchCount / signalWords.length > 0.3, set usedFounderContent = true, score += 5, break. Flag: 'Uses founder\\'s real experience'."
+    },
+    {
+      "name": "Tone Alignment",
+      "check": "Check that the post has at least 3 paragraph breaks (double newlines) and more than 2 sentences. These are structural proxies for the 'short paragraphs, varied length' voice rules. Requires profileData.voice or profileData.tone to be present.",
+      "scoreImpact": "+3",
+      "implementation": "toneSource = profileData.voice || profileData.tone. toneWords = toneSource split and filtered length > 3. hasShortParagraphs = content.split('\\n\\n').length >= 3. hasVariedLength = sentences.length > 2. All three conditions must be true. Flag: 'Tone alignment detected'."
+    },
+    {
+      "name": "Hook Length Enforcement",
+      "check": "Extract the first paragraph (content before first double newline, or first 160 characters). Check that it does not exceed 2 lines. A hook longer than 2 lines violates the core hook rule and reduces scroll-stopping power.",
+      "scoreImpact": "-5",
+      "implementation": "hookText = content.split('\\n\\n')[0]. hookLines = hookText.split('\\n').filter(l => l.trim().length > 0). if (hookLines.length > 2) score -= 5. Flag: 'Hook exceeds 2 lines'."
+    },
+    {
+      "name": "Question Hook Penalty",
+      "check": "Check if the first line ends with a question mark. Playbook rule: statements outperform questions as hooks. A question as the opening line is a structural weakness.",
+      "scoreImpact": "-5",
+      "implementation": "firstLine = content.split('\\n')[0].trim(). if (firstLine.endsWith('?')) score -= 5. Flag: 'Hook is a question — statements outperform questions'."
+    },
+    {
+      "name": "Engagement Bait CTA Detection",
+      "check": "Scan the final 200 characters of the post for engagement bait phrases: ['follow me for more', 'share if you agree', 'repost if this resonates', 'tag someone who needs this', 'drop a comment', 'save this for later', 'bookmark this', 'smash that', 'if you found this helpful']. These are listed in BANNED_PHRASES and signal low-quality content.",
+      "scoreImpact": "-5",
+      "implementation": "lastChunk = content.slice(-200).toLowerCase(). Define ctaBaitPhrases array. For each phrase, if lastChunk.includes(phrase) apply penalty and flag. Flag: 'Engagement bait CTA detected'."
+    },
+    {
+      "name": "Specificity Signal",
+      "check": "Scan for the presence of at least one concrete specificity marker: a numeric value (regex /\\d+/), a dollar amount (/\\$[\\d,]+/), a percentage (/\\d+%/), or a year (/\\b(19|20)\\d{2}\\b/). Posts with no specificity markers are vague and lack credibility signals.",
+      "scoreImpact": "-5 if absent",
+      "implementation": "specificityPatterns = [/\\d+/, /\\$[\\d,]+/, /\\d+%/, /\\b(19|20)\\d{2}\\b/]. hasSpecificity = specificityPatterns.some(p => p.test(content)). if (!hasSpecificity) score -= 5. Flag: 'No specificity markers found — add a number, date, or dollar figure'."
+    },
+    {
+      "name": "Announcement Pattern Detection",
+      "check": "Check the first 100 characters for announcement patterns that signal a 'miss' post type: phrases like 'excited to announce', 'thrilled to share', 'we are pleased to', 'I am happy to announce', 'proud to share'. These are in BANNED_PHRASES and indicate self-serving content.",
+      "scoreImpact": "-10",
+      "implementation": "openingChunk = content.slice(0, 100).toLowerCase(). announcementPhrases = ['excited to announce', 'thrilled to share', 'we are pleased', 'proud to share', 'happy to announce']. if any match, score -= 10. Flag: 'Announcement-style opener detected'."
+    },
+    {
+      "name": "First Person Voice",
+      "check": "Check that the post uses 'I' (first person singular) rather than 'We' (first person plural corporate voice). Count occurrences of standalone 'we ' vs ' i '. If 'we' count exceeds 'i' count, penalize.",
+      "scoreImpact": "-5",
+      "implementation": "iCount = (content.match(/\\bI\\b/g) || []).length. weCount = (content.match(/\\bWe\\b/gi) || []).length. if (weCount > iCount) score -= 5. Flag: 'Corporate \\'we\\' voice detected — use first person \\'I\\''."
+    },
+    {
+      "name": "Ending Question Quality",
+      "check": "Check the final 200 characters for a question mark. If present, check it is not a generic bait question ('what do you think?', 'agree?', 'thoughts?'). A specific closing question is an engagement signal; a generic one is a penalty.",
+      "scoreImpact": "+3 for specific question, -3 for generic question",
+      "implementation": "endChunk = content.slice(-200).toLowerCase(). hasQuestion = endChunk.includes('?'). genericEndQuestions = ['what do you think?', 'agree?', 'thoughts?', 'am i wrong?']. if (hasQuestion && !genericEndQuestions.some(q => endChunk.includes(q))) score += 3. else if (genericEndQuestions.some(q => endChunk.includes(q))) score -= 3."
+    },
+    {
+      "name": "Paragraph Structure",
+      "check": "Count double-newline paragraph breaks. For posts over 500 characters, require at least 3 paragraph breaks. LinkedIn is mobile-first; wall-of-text posts are abandoned before 'see more' is clicked.",
+      "scoreImpact": "-5 if under threshold",
+      "implementation": "paragraphs = content.split('\\n\\n').filter(p => p.trim().length > 0). if (content.length > 500 && paragraphs.length < 3) score -= 5. Flag: 'Insufficient paragraph breaks — add white space for mobile readability'."
+    },
+    {
+      "name": "Post Length Floor",
+      "check": "Check that the post is not too short to provide value. Posts under 150 characters lack the dwell time needed for algorithmic performance and likely provide no substantial lesson or narrative.",
+      "scoreImpact": "-5",
+      "implementation": "if (content.trim().length < 150) score -= 5. Flag: 'Post too short — insufficient dwell time signal'."
+    }
+  ]
+}

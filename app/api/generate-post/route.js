@@ -7,6 +7,7 @@ import {
   buildSystemPrompt,
   buildUserPrompt,
   scoreAuthenticity,
+  classifyTopicType,
   POST_TYPE_CONFIG,
 } from "@/lib/ai-prompts";
 
@@ -101,6 +102,14 @@ export async function POST(request) {
       additionalContext || ""
     );
 
+    // Validate API key is configured
+    if (!process.env.ANTHROPIC_API_KEY) {
+      return new Response(
+        JSON.stringify({ error: "AI service not configured. Please contact support." }),
+        { status: 500, headers: { "Content-Type": "application/json" } }
+      );
+    }
+
     // Initialize Anthropic client
     const anthropic = new Anthropic();
 
@@ -115,7 +124,7 @@ export async function POST(request) {
           const messageStream = anthropic.messages.stream({
             model: "claude-sonnet-4-20250514",
             max_tokens: 1500,
-            temperature: 0.8,
+            temperature: POST_TYPE_CONFIG[postType]?.temperature ?? 0.75,
             system: systemPrompt,
             messages: [{ role: "user", content: userPrompt }],
           });
@@ -131,7 +140,9 @@ export async function POST(request) {
               // Run authenticity scoring
               const { score, flags } = scoreAuthenticity(
                 fullContent,
-                profileData
+                profileData,
+                postType,
+                topic.trim()
               );
 
               // Save draft to DB
@@ -181,7 +192,7 @@ export async function POST(request) {
           });
 
           messageStream.on("error", (err) => {
-            console.error("Stream error:", err);
+            console.error("Stream error:", err.message, err.status || "");
             const errorData = JSON.stringify({
               type: "error",
               message: "Generation failed. Please try again.",
@@ -190,7 +201,7 @@ export async function POST(request) {
             controller.close();
           });
         } catch (err) {
-          console.error("Stream setup error:", err);
+          console.error("Stream setup error:", err.message);
           const errorData = JSON.stringify({
             type: "error",
             message: "Failed to start generation.",
